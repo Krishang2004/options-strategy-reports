@@ -1,4 +1,11 @@
 <title>Chakravyuh OI Recentre — Performance Report</title>
+<script>
+// Applied before the stylesheet paints anything, so a saved "light"
+// preference never flashes dark first. Shared localStorage key with the
+// dashboard (index.html) so the choice carries over between them.
+(function(){ try{ if (localStorage.getItem('reportsTheme') === 'light')
+  document.documentElement.setAttribute('data-theme', 'light'); }catch(e){} })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
 <style>
@@ -97,6 +104,8 @@ button{ font-family:inherit; }
 }
 .navitem.active .ni-ico{ color:var(--accent); filter:drop-shadow(0 0 6px color-mix(in srgb, var(--accent) 55%, transparent)); }
 .sidebar-foot{ margin-top:auto; display:flex; flex-direction:column; gap:10px; padding-top:14px; border-top:1px solid var(--term-border); }
+.theme-switch{ width:100%; justify-content:center; }
+.theme-switch button{ flex:1; padding:6px 8px; font-size:11px; text-align:center; }
 .no-api{ display:flex; align-items:center; gap:6px; font-size:10.5px; color:var(--term-good); font-weight:600; }
 .no-api svg{ width:11px; height:11px; }
 .run-info{ font-family:"JetBrains Mono",monospace; font-size:10px; color:var(--term-text); line-height:1.6; }
@@ -317,6 +326,10 @@ footer.page-footer{ margin-top:22px; padding-top:14px; border-top:1px solid var(
       <button class="navitem" data-tab="ledger"><span class="ni-ico">▦</span>Ledger</button>
     </div>
     <div class="sidebar-foot">
+      <div class="switch theme-switch" role="tablist" aria-label="Theme">
+        <button id="themeDark" class="active" role="tab" aria-selected="true">◑ Dark</button>
+        <button id="themeLight" role="tab" aria-selected="false">☀ Light</button>
+      </div>
       <span class="no-api"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg>OFFLINE — NO LIVE API CALLS</span>
       <div class="run-info" id="runInfo"></div>
     </div>
@@ -499,6 +512,24 @@ footer.page-footer{ margin-top:22px; padding-top:14px; border-top:1px solid var(
       document.querySelectorAll('.tabpanel').forEach(function(p){ p.hidden = (p.getAttribute('data-tabpanel') !== tab); });
     });
   });
+
+  // ---------------- theme toggle ----------------
+  // Charts render colors as literal var(--x) references inside the SVG
+  // markup (see renderEquity/renderDaily/etc.), so the browser re-resolves
+  // them from the CSS cascade the instant data-theme changes - nothing here
+  // needs to re-render anything, just flip the attribute.
+  function applyTheme(theme){
+    if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+    else document.documentElement.removeAttribute('data-theme');
+    try { localStorage.setItem('reportsTheme', theme); } catch(e){}
+    $('themeDark').classList.toggle('active', theme !== 'light');
+    $('themeDark').setAttribute('aria-selected', theme !== 'light');
+    $('themeLight').classList.toggle('active', theme === 'light');
+    $('themeLight').setAttribute('aria-selected', theme === 'light');
+  }
+  applyTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
+  $('themeDark').addEventListener('click', function(){ applyTheme('dark'); });
+  $('themeLight').addEventListener('click', function(){ applyTheme('light'); });
 
   // ---------------- masthead / mechanics (static per strategy) ----------------
   document.title = (profile.display_name || 'Strategy') + ' — Performance Report';
