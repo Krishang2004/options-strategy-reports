@@ -134,7 +134,7 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
     <div>
       <div class="eyebrow">Options Data Layer</div>
       <h1>Strategy Report Dashboard</h1>
-      <div class="sub"><b>4</b> strategies · <b>10</b> stored runs. Pick a strategy to open its full report — Overview, Mechanics, Performance, Deep-Dive and Ledger tabs, exactly as build_ledger.py wrote it.</div>
+      <div class="sub"><b>5</b> strategies · <b>11</b> stored runs. Pick a strategy to open its full report — Overview, Mechanics, Performance, Deep-Dive and Ledger tabs, exactly as build_ledger.py wrote it.</div>
     </div>
     <div class="switch theme-switch" role="tablist" aria-label="Theme">
       <button id="themeDark" class="active" role="tab" aria-selected="true">◑ Dark</button>
@@ -143,6 +143,33 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
   </div>
   <div class="grid">
     
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="card-name">Sensex Shifting Master</div>
+          <div class="card-family">Short premium / distance-from-spot ladder</div>
+        </div>
+        <div class="chips"><span class="chip">SENSEX</span></div>
+      </div>
+      <p class="card-thesis">Farm decay from a 3-strike short ladder on each side, sliding it to keep every leg at a fixed distance from live spot - the same mechanic as NF Shifting Master, pointed at SENSEX with its own risk parameters.</p>
+      
+
+      <div class="headline-mini">
+        <div class="hm-stat mono good">Sharpe 0.13 over 26 days</div>
+        <div class="hm-sentence">A thin, largely unproven edge at this sample size - not yet distinguishable from noise.</div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹2,093</div></div>
+        <div class="stat"><div class="s-lbl">Sharpe</div><div class="s-val mono">0.13</div></div>
+        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹25,147</div></div>
+        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">26d / 1371L</div></div>
+      </div>
+
+      <a class="btn" href="sensex_shifting_master_20260910_164610_ledger.html" target="_blank" rel="noopener">Open latest report — SENSEX, 2026-03-12 → 2026-09-03 →</a>
+      
+    </div>
+
     <div class="card">
       <div class="card-top">
         <div>
