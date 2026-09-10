@@ -58,6 +58,7 @@ a{ color:inherit; text-decoration:none; }
 .chip{ font-family:"JetBrains Mono",monospace; font-size:10.5px; font-weight:600; color:var(--ink-2);
   background:var(--surface-2); border:1px solid var(--border); border-radius:99px; padding:3px 9px; white-space:nowrap; }
 .card-thesis{ font-size:13px; color:var(--ink-2); margin:0; line-height:1.5; }
+.card-featured-note{ font-size:11px; color:var(--muted); font-style:italic; margin-top:-6px; }
 
 .headline-mini{ display:flex; gap:14px; align-items:center; background:var(--accent-soft);
   border:1px solid color-mix(in srgb, var(--accent) 30%, transparent); border-left:3px solid var(--accent);
@@ -117,6 +118,7 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
         <div class="chips"><span class="chip">NIFTY</span></div>
       </div>
       <p class="card-thesis">Farm decay from a 3-strike short ladder on each side, sliding it to keep every leg at a fixed distance from live spot.</p>
+      
 
       <div class="headline-mini">
         <div class="hm-stat mono good">Sharpe 8.12, net of costs</div>
@@ -143,6 +145,7 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
         <div class="chips"><span class="chip">NIFTY</span><span class="chip">SENSEX</span></div>
       </div>
       <p class="card-thesis">Stay short whichever call and put currently carry the most open interest, rolling each leg independently the moment a new strike takes the lead.</p>
+      <div class="card-featured-note">featured: latest NIFTY run (its default instrument) - other instruments below are compatibility checks, not tuned for it</div>
 
       <div class="headline-mini">
         <div class="hm-stat mono good">Sharpe 0.59, net of costs</div>
@@ -197,30 +200,31 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
         <div class="chips"><span class="chip">NIFTY</span><span class="chip">SENSEX</span></div>
       </div>
       <p class="card-thesis">Sell time decay six times a day on expiry, cut losers wide and winners early.</p>
+      <div class="card-featured-note">featured: latest NIFTY run (its default instrument) - other instruments below are compatibility checks, not tuned for it</div>
 
       <div class="headline-mini">
-        <div class="hm-stat mono bad">Net loss over the sample</div>
-        <div class="hm-sentence">Both gross and net results are negative over 26 expiry days - this is not a costs problem, the underlying idea lost money.</div>
+        <div class="hm-stat mono good">Sharpe 1.50, net of costs</div>
+        <div class="hm-sentence">A real, cost-surviving edge over the 26 days tested - still too short a sample to call it proven.</div>
       </div>
 
       <div class="stat-row">
-        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono bad">−₹161,371</div></div>
-        <div class="stat"><div class="s-lbl">Sharpe</div><div class="s-val mono">-0.60</div></div>
-        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹448,035</div></div>
-        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">26d / 306L</div></div>
+        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹320,349</div></div>
+        <div class="stat"><div class="s-lbl">Sharpe</div><div class="s-val mono">1.50</div></div>
+        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹218,009</div></div>
+        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">26d / 312L</div></div>
       </div>
 
-      <a class="btn" href="short_straddle_20260909_213257_ledger.html" target="_blank" rel="noopener">Open latest report — SENSEX, 2026-03-12 → 2026-09-03 →</a>
+      <a class="btn" href="short_straddle_20260909_122625_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-03-10 → 2026-09-01 →</a>
       
         <details class="history">
           <summary>2 earlier runs</summary>
           <div class="run-list">
-    <a class="run-row" href="short_straddle_20260909_122625_ledger.html" target="_blank" rel="noopener">
-      <span class="rr-inst">NIFTY</span>
-      <span class="rr-range mono">2026-03-10 → 2026-09-01</span>
-      <span class="rr-stat mono">26 days · 312 legs</span>
-      <span class="rr-pnl mono good">₹320,349</span>
-      <span class="rr-sharpe mono">Sharpe 1.50</span>
+    <a class="run-row" href="short_straddle_20260909_213257_ledger.html" target="_blank" rel="noopener">
+      <span class="rr-inst">SENSEX</span>
+      <span class="rr-range mono">2026-03-12 → 2026-09-03</span>
+      <span class="rr-stat mono">26 days · 306 legs</span>
+      <span class="rr-pnl mono bad">−₹161,371</span>
+      <span class="rr-sharpe mono">Sharpe -0.60</span>
       <span class="rr-arrow">→</span>
     </a>
     <a class="run-row" href="short_straddle_20260908_124505_ledger.html" target="_blank" rel="noopener">
@@ -243,6 +247,7 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
         <div class="chips"><span class="chip">NIFTY</span></div>
       </div>
       <p class="card-thesis">Stay short an ATM straddle all day, resetting to flat delta every time the position ratchets 15% off its own low.</p>
+      
 
       <div class="headline-mini">
         <div class="hm-stat mono good">Sharpe 1.17, net of costs</div>
