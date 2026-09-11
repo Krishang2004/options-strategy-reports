@@ -431,6 +431,7 @@ footer.page-footer{ margin-top:22px; padding-top:14px; border-top:1px solid var(
         <div><dt>Position unit</dt><dd>A "position" groups legs by a shared entry moment - the whole <b>straddle</b> when both legs always enter together, one leg's own episode when they don't. Check <span class="mono">avg_legs</span> in Deep-Dive.</dd></div>
         <div><dt>Annualisation</dt><dd>All annualised figures use <b>√52</b> (expiry-day cadence), not the equity-market √252 convention.</dd></div>
         <div><dt>Excursion (MAE/MFE)</dt><dd>Reconstructed from raw <b>1-minute bars</b>, mark-to-close, gross of costs.</dd></div>
+        <div><dt>Capital assumed</dt><dd id="methodCapital">—</dd></div>
         <div><dt>Costs modelled</dt><dd id="methodCosts">—</dd></div>
         <div><dt>End of day</dt><dd>Anything open at the strategy's own exit time is force-closed. A <span class="mono">Forced EOD Close</span> in the ledger would mean the exit logic itself failed.</dd></div>
       </dl>
@@ -545,6 +546,7 @@ footer.page-footer{ margin-top:22px; padding-top:14px; border-top:1px solid var(
   var slippageStr = meta.slippage_pct > 0 ? meta.slippage_pct+'% of each fill' : '0% (not modelled)';
   $('runInfo').innerHTML = 'Brokerage: <b>'+brokerageStr+'</b><br>Slippage: <b>'+slippageStr+'</b>';
   $('methodCosts').innerHTML = 'STT, exchange, SEBI &amp; stamp duty per <a href="#" style="text-decoration:underline;">CostModel</a>. Brokerage '+brokerageStr+'. Slippage '+slippageStr+'.';
+  $('methodCapital').textContent = inr(meta.capital, 0) + ' - only the denominator for CAGR / return-on-capital below, not a position-sizing input.';
 
   function list(id, items){ $(id).innerHTML = (items||[]).map(function(t){ return '<li>'+esc(t)+'</li>'; }).join(''); }
   list('entryRules', profile.entry_rules);
