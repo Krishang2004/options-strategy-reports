@@ -17,13 +17,17 @@
 <style>
 :root{
   color-scheme: light;
-  /* MNCL "Midnight Executive" brand palette, as supplied - unmodified. */
-  --mncl-navy:#091E3D; --mncl-navy-2:#0D2E57;
-  --mncl-olive:#A2C664; --mncl-olive-pale:#EEF4E6;
-  --mncl-blue:#2864A9;
-  --mncl-red:#A34346; --mncl-red-pale:#FBEFEE;
-  --mncl-bg:#EEF3FB; --mncl-white:#FFFFFF; --mncl-border:#DCE4F0;
-  --mncl-text:#142239; --mncl-text-muted:#5B6472;
+  /* Palette derived from the real Monarch Networth Capital logo: the
+     wordmark's medium blue, the icon's green-to-teal gradient, and the
+     lime-green underline rule beneath the wordmark. Navy/navy-2 are darker
+     shades of that same blue family, not an unrelated hue. Red has no
+     source in the logo - it's this build's own semantic loss/risk color. */
+  --mncl-navy:#0F2C47; --mncl-navy-2:#173F63;
+  --mncl-olive:#8DC63F; --mncl-olive-pale:#EEF7E0;
+  --mncl-blue:#1F6FB2; --mncl-teal:#1A8F94;
+  --mncl-red:#AE4B44; --mncl-red-pale:#FBEFEE;
+  --mncl-bg:#F2F6FA; --mncl-white:#FFFFFF; --mncl-border:#DCE4EC;
+  --mncl-text:#152A3E; --mncl-text-muted:#5A6C7D;
 
   /* App tokens mapped onto the brand palette above - "Executive" (light,
      the default): navy is UI chrome (nav/headers), blue is the interactive
@@ -41,10 +45,10 @@
   --shadow: 0 1px 2px rgba(9,30,61,.06), 0 16px 34px -18px rgba(9,30,61,.22);
 }
 /* "Midnight" - the dark variant, opt-in via the toggle. Only the light
-   values above were brand-specified; these dark equivalents are this
-   session's own reasoned extrapolation (navy as literal "midnight"
-   background, brand accents re-checked for contrast on dark), not a given
-   spec value - flagged here and in the delivery summary. */
+   values above trace to the logo directly; these dark equivalents are this
+   build's own reasoned extrapolation (the brand's blue darkened for the
+   background, accents re-checked for contrast on dark), not a given spec
+   value - flagged here and in the delivery summary. */
 :root[data-theme="dark"]{
   color-scheme: dark;
   --page:var(--mncl-navy); --page-2:color-mix(in srgb, var(--mncl-navy) 85%, black);
@@ -53,9 +57,9 @@
   --ink-1:#FDFEFF; --ink-2:rgba(255,255,255,.75); --muted:rgba(255,255,255,.5);
   --border:rgba(255,255,255,.14); --border-strong:rgba(255,255,255,.26);
   --accent:color-mix(in srgb, var(--mncl-blue) 78%, white); --accent-strong:color-mix(in srgb, var(--mncl-blue) 55%, white);
-  --accent-soft:rgba(64,141,214,.2);
-  --good:var(--mncl-olive); --good-soft:rgba(162,198,100,.2);
-  --loss:color-mix(in srgb, var(--mncl-red) 82%, white); --loss-soft:rgba(163,67,70,.24);
+  --accent-soft:color-mix(in srgb, var(--mncl-blue) 20%, transparent);
+  --good:var(--mncl-olive); --good-soft:color-mix(in srgb, var(--mncl-olive) 20%, transparent);
+  --loss:color-mix(in srgb, var(--mncl-red) 82%, white); --loss-soft:color-mix(in srgb, var(--mncl-red) 24%, transparent);
   --shadow: 0 1px 2px rgba(0,0,0,.4), 0 16px 40px -18px rgba(0,0,0,.65);
 }
 :root:not([data-theme="dark"]) .aurora, :root:not([data-theme="dark"]) .aurora::before, :root:not([data-theme="dark"]) .aurora::after{ display:none; }
@@ -72,7 +76,7 @@ svg{ display:block; flex:none; }
   background:
     radial-gradient(60% 50% at 10% -10%, color-mix(in srgb, var(--mncl-blue) 22%, transparent), transparent 60%),
     radial-gradient(55% 46% at 100% -6%, color-mix(in srgb, var(--mncl-navy-2) 30%, transparent), transparent 58%),
-    radial-gradient(46% 40% at 84% 106%, color-mix(in srgb, var(--mncl-olive) 12%, transparent), transparent 60%); }
+    radial-gradient(46% 40% at 84% 106%, color-mix(in srgb, var(--mncl-teal) 12%, transparent), transparent 60%); }
 .aurora::after{ content:""; position:absolute; inset:-20% -10% auto -10%; height:60%;
   background:radial-gradient(closest-side, color-mix(in srgb, var(--mncl-blue) 14%, transparent), transparent 70%);
   filter:blur(44px); animation:drift 24s ease-in-out infinite alternate; }
@@ -194,7 +198,7 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
     <div>
       <div class="brand-lockup"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2l7 4v8l-7 4-7-4V6z" stroke-linejoin="round"/><path d="M10 2v16M3 6l7 4 7-4" stroke-linejoin="round"/></svg><span class="word">MNCL <b>·</b> OPTIONS DESK</span><span class="rule"></span></div>
       <h1>Strategy Report Dashboard</h1>
-      <div class="sub"><b>6</b> strategies · <b>13</b> stored runs. Headline metric is <b>R/MDD</b> (profit ÷ worst drawdown) - Sharpe is shown secondary. Pick a strategy to open its full report.</div>
+      <div class="sub"><b>6</b> strategies · <b>13</b> stored runs. Headline metric is <b>Sharpe</b> (risk-adjusted return) - R/MDD is shown secondary. Pick a strategy to open its full report.</div>
     </div>
     <div class="page-head-right">
       <div class="nav-links">
@@ -211,8 +215,8 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
     <div class="summary-bar">
       <div class="sb-item"><div class="sb-val mono">6</div><div class="sb-lbl">Strategies</div></div>
       <div class="sb-item"><div class="sb-val mono good">₹383,652</div><div class="sb-lbl">Combined Net P&amp;L (featured runs)</div></div>
-      <div class="sb-item"><div class="sb-val mono">4<span class="sb-of">/6</span></div><div class="sb-lbl">R/MDD ≥ 1 (adequate or better)</div></div>
-      <div class="sb-item"><div class="sb-val mono bad">2<span class="sb-of">/6</span></div><div class="sb-lbl">R/MDD &lt; 1 (thin or underwater)</div></div>
+      <div class="sb-item"><div class="sb-val mono">4<span class="sb-of">/6</span></div><div class="sb-lbl">Sharpe ≥ 1 (solid or better)</div></div>
+      <div class="sb-item"><div class="sb-val mono bad">2<span class="sb-of">/6</span></div><div class="sb-lbl">Sharpe &lt; 1 (modest or thin)</div></div>
       <div class="sb-item"><div class="sb-val mono">26d</div><div class="sb-lbl">Average sample size</div></div>
     </div>
 
@@ -223,8 +227,8 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
     <div class="filter-group"><label for="fFamily">Mechanic</label>
       <select id="fFamily"><option value="">All</option><option value="OI momentum">OI momentum</option><option value="Re-centering straddle">Re-centering straddle</option><option value="Short-premium ladder">Short-premium ladder</option><option value="Theta harvest">Theta harvest</option></select>
     </div>
-    <div class="filter-group"><label for="fRmdd">Min R/MDD</label>
-      <input type="number" id="fRmdd" step="0.1" placeholder="e.g. 1.0" style="width:80px;">
+    <div class="filter-group"><label for="fSharpe">Min Sharpe</label>
+      <input type="number" id="fSharpe" step="0.1" placeholder="e.g. 1.0" style="width:80px;">
     </div>
     <button class="filter-reset" id="fReset">Reset filters</button>
     <span class="filter-count" id="fCount"></span>
@@ -247,14 +251,14 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       
 
       <div class="headline-mini">
-        <div class="hm-stat mono good">R/MDD 4.12, net of costs</div>
-        <div class="hm-sentence">Clears its own worst drawdown several times over across 27 expiry days (Sharpe 2.96 secondary) - a solid, cost-surviving edge, still too short a sample to call proven.</div>
+        <div class="hm-stat mono good">Sharpe 2.96, net of costs</div>
+        <div class="hm-sentence">Strong risk-adjusted edge over 27 expiry days (R/MDD 4.12).</div>
       </div>
 
       <div class="stat-row">
-        <div class="stat stat-primary"><div class="s-lbl">R/MDD <span class="sev-badge sev-good"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>Strong</span></div><div class="s-val mono">4.12</div></div>
+        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-good"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>Strong</span></div><div class="s-val mono">2.96</div></div>
         <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹12,954</div></div>
-        <div class="stat stat-secondary"><div class="s-lbl">Sharpe (secondary)</div><div class="s-val mono">2.96</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">4.12</div></div>
         <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹3,146</div></div>
         <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">27d / 253L</div></div>
       </div>
@@ -306,14 +310,14 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       
 
       <div class="headline-mini">
-        <div class="hm-stat mono good">R/MDD 0.08, net of costs</div>
-        <div class="hm-sentence">Net-profitable over 26 expiry days, but total profit hasn't yet caught up to the worst drawdown endured to get there (Sharpe 0.13 secondary) - a thin margin for error at this sample size.</div>
+        <div class="hm-stat mono good">Sharpe 0.13, net of costs</div>
+        <div class="hm-sentence">Thin edge over 26 expiry days (R/MDD 0.08).</div>
       </div>
 
       <div class="stat-row">
-        <div class="stat stat-primary"><div class="s-lbl">R/MDD <span class="sev-badge sev-watch"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M10 3l8.5 14.5H1.5z"/><path d="M10 8v4" stroke-linecap="round"/><circle cx="10" cy="14.5" r="0.6" fill="currentColor" stroke="none"/></svg>Thin</span></div><div class="s-val mono">0.08</div></div>
+        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-bad"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 5l10 10M15 5L5 15"/></svg>Thin</span></div><div class="s-val mono">0.13</div></div>
         <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹2,093</div></div>
-        <div class="stat stat-secondary"><div class="s-lbl">Sharpe (secondary)</div><div class="s-val mono">0.13</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">0.08</div></div>
         <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹25,147</div></div>
         <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">26d / 1371L</div></div>
       </div>
@@ -337,14 +341,14 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       
 
       <div class="headline-mini">
-        <div class="hm-stat mono good">R/MDD 21.36, net of costs</div>
-        <div class="hm-sentence">Profit runs several multiples of the worst drawdown over 27 expiry days (Sharpe 8.12 secondary) - a strong result by this desk's own R/MDD-first read, though still only 27 days of evidence.</div>
+        <div class="hm-stat mono good">Sharpe 8.12, net of costs</div>
+        <div class="hm-sentence">Strong risk-adjusted edge over 27 expiry days (R/MDD 21.36).</div>
       </div>
 
       <div class="stat-row">
-        <div class="stat stat-primary"><div class="s-lbl">R/MDD <span class="sev-badge sev-good"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>Strong</span></div><div class="s-val mono">21.36</div></div>
+        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-good"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>Strong</span></div><div class="s-val mono">8.12</div></div>
         <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹33,369</div></div>
-        <div class="stat stat-secondary"><div class="s-lbl">Sharpe (secondary)</div><div class="s-val mono">8.12</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">21.36</div></div>
         <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹1,562</div></div>
         <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">27d / 1413L</div></div>
       </div>
@@ -368,14 +372,14 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       <div class="card-featured-note">featured: latest NIFTY run (its default instrument) - other instruments below are compatibility checks, not tuned for it</div>
 
       <div class="headline-mini">
-        <div class="hm-stat mono good">R/MDD 0.83, net of costs</div>
-        <div class="hm-sentence">Net-profitable over 27 expiry days, but total profit hasn't yet caught up to the worst drawdown endured to get there (Sharpe 0.59 secondary) - a thin margin for error at this sample size.</div>
+        <div class="hm-stat mono good">Sharpe 0.59, net of costs</div>
+        <div class="hm-sentence">Modest edge over 27 expiry days (R/MDD 0.83).</div>
       </div>
 
       <div class="stat-row">
-        <div class="stat stat-primary"><div class="s-lbl">R/MDD <span class="sev-badge sev-watch"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M10 3l8.5 14.5H1.5z"/><path d="M10 8v4" stroke-linecap="round"/><circle cx="10" cy="14.5" r="0.6" fill="currentColor" stroke="none"/></svg>Thin</span></div><div class="s-val mono">0.83</div></div>
+        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-watch"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M10 3l8.5 14.5H1.5z"/><path d="M10 8v4" stroke-linecap="round"/><circle cx="10" cy="14.5" r="0.6" fill="currentColor" stroke="none"/></svg>Modest</span></div><div class="s-val mono">0.59</div></div>
         <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹3,614</div></div>
-        <div class="stat stat-secondary"><div class="s-lbl">Sharpe (secondary)</div><div class="s-val mono">0.59</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">0.83</div></div>
         <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹4,368</div></div>
         <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">27d / 180L</div></div>
       </div>
@@ -447,14 +451,14 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       <div class="card-featured-note">featured: latest NIFTY run (its default instrument) - other instruments below are compatibility checks, not tuned for it</div>
 
       <div class="headline-mini">
-        <div class="hm-stat mono good">R/MDD 1.47, net of costs</div>
-        <div class="hm-sentence">Net-profitable over 26 expiry days and ahead of its own worst drawdown, but not by a wide margin (Sharpe 1.50 secondary) - a real edge, not yet a comfortable one.</div>
+        <div class="hm-stat mono good">Sharpe 1.50, net of costs</div>
+        <div class="hm-sentence">Solid, cost-surviving edge over 26 expiry days (R/MDD 1.47).</div>
       </div>
 
       <div class="stat-row">
-        <div class="stat stat-primary"><div class="s-lbl">R/MDD <span class="sev-badge sev-ok"><svg viewBox="0 0 20 20" width="12" height="12" fill="currentColor"><circle cx="10" cy="10" r="5"/></svg>Adequate</span></div><div class="s-val mono">1.47</div></div>
+        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-ok"><svg viewBox="0 0 20 20" width="12" height="12" fill="currentColor"><circle cx="10" cy="10" r="5"/></svg>Solid</span></div><div class="s-val mono">1.50</div></div>
         <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹320,349</div></div>
-        <div class="stat stat-secondary"><div class="s-lbl">Sharpe (secondary)</div><div class="s-val mono">1.50</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">1.47</div></div>
         <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹218,009</div></div>
         <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">26d / 312L</div></div>
       </div>
@@ -516,14 +520,14 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       
 
       <div class="headline-mini">
-        <div class="hm-stat mono good">R/MDD 1.02, net of costs</div>
-        <div class="hm-sentence">Net-profitable over 26 expiry days and ahead of its own worst drawdown, but not by a wide margin (Sharpe 1.17 secondary) - a real edge, not yet a comfortable one.</div>
+        <div class="hm-stat mono good">Sharpe 1.17, net of costs</div>
+        <div class="hm-sentence">Solid, cost-surviving edge over 26 expiry days (R/MDD 1.02).</div>
       </div>
 
       <div class="stat-row">
-        <div class="stat stat-primary"><div class="s-lbl">R/MDD <span class="sev-badge sev-ok"><svg viewBox="0 0 20 20" width="12" height="12" fill="currentColor"><circle cx="10" cy="10" r="5"/></svg>Adequate</span></div><div class="s-val mono">1.02</div></div>
+        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-ok"><svg viewBox="0 0 20 20" width="12" height="12" fill="currentColor"><circle cx="10" cy="10" r="5"/></svg>Solid</span></div><div class="s-val mono">1.17</div></div>
         <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹11,272</div></div>
-        <div class="stat stat-secondary"><div class="s-lbl">Sharpe (secondary)</div><div class="s-val mono">1.17</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">1.02</div></div>
         <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹11,051</div></div>
         <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">26d / 226L</div></div>
       </div>
@@ -583,26 +587,26 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
   function applyFilters(){
     var inst = document.getElementById('fInstrument').value;
     var fam = document.getElementById('fFamily').value;
-    var minRmdd = parseFloat(document.getElementById('fRmdd').value);
+    var minSharpe = parseFloat(document.getElementById('fSharpe').value);
     var shown = 0;
     cards.forEach(function(c){
       var okInst = !inst || (c.getAttribute('data-instruments')||'').indexOf(inst) >= 0;
       var okFam = !fam || c.getAttribute('data-family') === fam;
-      var rmddAttr = c.getAttribute('data-rmdd');
-      var okRmdd = isNaN(minRmdd) || (rmddAttr !== '' && parseFloat(rmddAttr) >= minRmdd);
-      var visible = okInst && okFam && okRmdd;
+      var sharpeAttr = c.getAttribute('data-sharpe');
+      var okSharpe = isNaN(minSharpe) || (sharpeAttr !== '' && parseFloat(sharpeAttr) >= minSharpe);
+      var visible = okInst && okFam && okSharpe;
       c.hidden = !visible;
       if (visible) shown++;
     });
     document.getElementById('fCount').textContent = shown + ' of ' + cards.length + ' strategies shown';
   }
-  ['fInstrument','fFamily','fRmdd'].forEach(function(id){
+  ['fInstrument','fFamily','fSharpe'].forEach(function(id){
     document.getElementById(id).addEventListener('input', applyFilters);
   });
   document.getElementById('fReset').addEventListener('click', function(){
     document.getElementById('fInstrument').value = '';
     document.getElementById('fFamily').value = '';
-    document.getElementById('fRmdd').value = '';
+    document.getElementById('fSharpe').value = '';
     applyFilters();
   });
   applyFilters();
