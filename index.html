@@ -3,82 +3,133 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Strategy Report Dashboard</title>
+<title>MNCL Options Desk Dashboard</title>
 <script>
-// Applied before the stylesheet paints, so a saved "light" preference never
-// flashes dark first. Shared localStorage key with every report page, so
-// the choice carries over when you open one from here.
-(function(){ try{ if (localStorage.getItem('reportsTheme') === 'light')
-  document.documentElement.setAttribute('data-theme', 'light'); }catch(e){} })();
+// Applied before the stylesheet paints, so a saved "dark" preference never
+// flashes light first. Shared localStorage key with every report page, so
+// the choice carries over when you open one from here. Light ("Executive")
+// is the brand default; dark ("Midnight") is opt-in.
+(function(){ try{ if (localStorage.getItem('reportsTheme') === 'dark')
+  document.documentElement.setAttribute('data-theme', 'dark'); }catch(e){} })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
 <style>
 :root{
+  color-scheme: light;
+  /* MNCL "Midnight Executive" brand palette, as supplied - unmodified. */
+  --mncl-navy:#091E3D; --mncl-navy-2:#0D2E57;
+  --mncl-olive:#A2C664; --mncl-olive-pale:#EEF4E6;
+  --mncl-blue:#2864A9;
+  --mncl-red:#A34346; --mncl-red-pale:#FBEFEE;
+  --mncl-bg:#EEF3FB; --mncl-white:#FFFFFF; --mncl-border:#DCE4F0;
+  --mncl-text:#142239; --mncl-text-muted:#5B6472;
+
+  /* App tokens mapped onto the brand palette above - "Executive" (light,
+     the default): navy is UI chrome (nav/headers), blue is the interactive
+     accent, olive/red are the only positive/negative colors anywhere. */
+  --page:var(--mncl-bg); --page-2:color-mix(in srgb, var(--mncl-white) 55%, var(--mncl-bg));
+  --surface:var(--mncl-white); --surface-2:color-mix(in srgb, var(--mncl-white) 70%, var(--mncl-bg));
+  --surface-3:color-mix(in srgb, var(--mncl-white) 40%, var(--mncl-bg));
+  --hairline-top:rgba(255,255,255,.6);
+  --ink-1:var(--mncl-text); --ink-2:color-mix(in srgb, var(--mncl-text) 55%, var(--mncl-text-muted));
+  --muted:var(--mncl-text-muted);
+  --border:var(--mncl-border); --border-strong:color-mix(in srgb, var(--mncl-border) 35%, var(--mncl-navy));
+  --accent:var(--mncl-blue); --accent-strong:var(--mncl-navy-2); --accent-soft:color-mix(in srgb, var(--mncl-blue) 14%, transparent);
+  --good:var(--mncl-olive); --good-soft:var(--mncl-olive-pale);
+  --loss:var(--mncl-red); --loss-soft:var(--mncl-red-pale);
+  --shadow: 0 1px 2px rgba(9,30,61,.06), 0 16px 34px -18px rgba(9,30,61,.22);
+}
+/* "Midnight" - the dark variant, opt-in via the toggle. Only the light
+   values above were brand-specified; these dark equivalents are this
+   session's own reasoned extrapolation (navy as literal "midnight"
+   background, brand accents re-checked for contrast on dark), not a given
+   spec value - flagged here and in the delivery summary. */
+:root[data-theme="dark"]{
   color-scheme: dark;
-  --page:#07080b; --page-2:#0a0c11;
-  --surface:rgba(255,255,255,.035); --surface-2:rgba(255,255,255,.055); --surface-3:rgba(255,255,255,.085);
-  --hairline-top:rgba(255,255,255,.07);
-  --ink-1:#f5f7fb; --ink-2:#c1c9d6; --muted:#828b9c;
-  --border:rgba(255,255,255,.09); --border-strong:rgba(255,255,255,.18);
-  --accent:#0a84ff; --accent-strong:#5aabff; --accent-soft:rgba(10,132,255,.16);
-  --good:#30d158; --loss:#ff453a;
+  --page:var(--mncl-navy); --page-2:color-mix(in srgb, var(--mncl-navy) 85%, black);
+  --surface:rgba(255,255,255,.05); --surface-2:rgba(255,255,255,.08); --surface-3:rgba(255,255,255,.12);
+  --hairline-top:rgba(255,255,255,.08);
+  --ink-1:#FDFEFF; --ink-2:rgba(255,255,255,.75); --muted:rgba(255,255,255,.5);
+  --border:rgba(255,255,255,.14); --border-strong:rgba(255,255,255,.26);
+  --accent:color-mix(in srgb, var(--mncl-blue) 78%, white); --accent-strong:color-mix(in srgb, var(--mncl-blue) 55%, white);
+  --accent-soft:rgba(64,141,214,.2);
+  --good:var(--mncl-olive); --good-soft:rgba(162,198,100,.2);
+  --loss:color-mix(in srgb, var(--mncl-red) 82%, white); --loss-soft:rgba(163,67,70,.24);
   --shadow: 0 1px 2px rgba(0,0,0,.4), 0 16px 40px -18px rgba(0,0,0,.65);
 }
-/* Manual light theme, toggled via the switch in the page header - mirrors
-   report_template.html's light palette so the two pages match. */
-:root[data-theme="light"]{
-  color-scheme: light;
-  --page:#f4f5f7; --page-2:#eceef2;
-  --surface:#ffffff; --surface-2:#eceef2; --surface-3:#e2e5ec;
-  --hairline-top:transparent;
-  --ink-1:#10141c; --ink-2:#4b5468; --muted:#8891a3;
-  --border:rgba(16,20,28,.10); --border-strong:rgba(16,20,28,.20);
-  --accent:#0a6bcf; --accent-strong:#0851a0; --accent-soft:#dbeafd;
-  --good:#0ca30c; --loss:#d03b3b;
-  --shadow: 0 1px 2px rgba(16,20,28,.05), 0 10px 28px -14px rgba(16,20,28,.18);
-}
-:root[data-theme="light"] .aurora, :root[data-theme="light"] .aurora::before, :root[data-theme="light"] .aurora::after{ display:none; }
+:root:not([data-theme="dark"]) .aurora, :root:not([data-theme="dark"]) .aurora::before, :root:not([data-theme="dark"]) .aurora::after{ display:none; }
 *{box-sizing:border-box;}
 html,body{height:100%;}
 body{ margin:0; background:var(--page); color:var(--ink-1); font-family:"Inter",system-ui,-apple-system,sans-serif; font-size:14px; line-height:1.5; -webkit-font-smoothing:antialiased; }
 .mono{ font-family:"JetBrains Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums; }
 a{ color:inherit; text-decoration:none; }
 ::selection{ background:var(--accent-soft); color:var(--ink-1); }
+svg{ display:block; flex:none; }
 
 .aurora{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; background:var(--page); }
 .aurora::before{ content:""; position:absolute; inset:0;
   background:
-    radial-gradient(60% 50% at 10% -10%, rgba(10,132,255,.16), transparent 60%),
-    radial-gradient(55% 46% at 100% -6%, rgba(94,92,230,.14), transparent 58%),
-    radial-gradient(46% 40% at 84% 106%, rgba(48,209,88,.08), transparent 60%); }
+    radial-gradient(60% 50% at 10% -10%, color-mix(in srgb, var(--mncl-blue) 22%, transparent), transparent 60%),
+    radial-gradient(55% 46% at 100% -6%, color-mix(in srgb, var(--mncl-navy-2) 30%, transparent), transparent 58%),
+    radial-gradient(46% 40% at 84% 106%, color-mix(in srgb, var(--mncl-olive) 12%, transparent), transparent 60%); }
 .aurora::after{ content:""; position:absolute; inset:-20% -10% auto -10%; height:60%;
-  background:radial-gradient(closest-side, rgba(10,132,255,.09), transparent 70%);
+  background:radial-gradient(closest-side, color-mix(in srgb, var(--mncl-blue) 14%, transparent), transparent 70%);
   filter:blur(44px); animation:drift 24s ease-in-out infinite alternate; }
 @keyframes drift{ from{ transform:translate3d(-4%,-2%,0) scale(1); } to{ transform:translate3d(6%,4%,0) scale(1.12); } }
 @media (prefers-reduced-motion: reduce){ .aurora::after{ animation:none; } }
 
-.wrap{ position:relative; z-index:1; max-width:1180px; margin:0 auto; padding:40px 30px 70px; }
-.page-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:20px; margin-bottom:28px; }
-.page-head .eyebrow{ font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--accent-strong); font-weight:700; }
-.page-head h1{ font-size:30px; font-weight:700; letter-spacing:-.02em; margin:6px 0 8px; }
+.wrap{ position:relative; z-index:1; max-width:1360px; margin:0 auto; padding:36px 30px 70px; }
+.page-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:20px; margin-bottom:22px; }
+.brand-lockup{ display:flex; align-items:center; gap:9px; margin-bottom:10px; }
+.brand-lockup .mark{ color:var(--accent-strong); }
+.brand-lockup .word{ font-family:"Inter",sans-serif; font-weight:800; font-size:14px; letter-spacing:.06em; color:var(--ink-1); }
+.brand-lockup .word b{ color:var(--good); }
+.brand-lockup .rule{ width:22px; height:2px; background:var(--good); border-radius:2px; }
+.page-head h1{ font-size:28px; font-weight:700; letter-spacing:-.02em; margin:0 0 8px; }
 .page-head .sub{ font-size:13.5px; color:var(--muted); max-width:76ch; }
 .page-head .sub b{ color:var(--ink-2); }
-@media (max-width:700px){ .page-head{ flex-direction:column; } }
+.page-head-right{ display:flex; flex-direction:column; align-items:flex-end; gap:10px; }
+@media (max-width:700px){ .page-head{ flex-direction:column; } .page-head-right{ align-items:flex-start; } }
+
+.nav-links{ display:flex; gap:8px; }
+.nav-link{ display:inline-flex; align-items:center; gap:7px; font-size:12.5px; font-weight:600; color:var(--ink-2);
+  background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:7px 12px; transition:border-color 140ms ease, color 140ms ease; }
+.nav-link:hover{ border-color:var(--accent); color:var(--accent-strong); }
 
 .switch{ display:inline-flex; flex-shrink:0; background:var(--surface-2); border:1px solid var(--border-strong); border-radius:22px; padding:3px; gap:2px; }
-.switch button{ border:0; background:transparent; font-size:12px; font-weight:600; padding:6px 14px; border-radius:18px; color:var(--ink-2); cursor:pointer; transition:filter 140ms ease; white-space:nowrap; }
+.switch button{ display:inline-flex; align-items:center; gap:6px; border:0; background:transparent; font-size:12px; font-weight:600; padding:6px 14px; border-radius:18px; color:var(--ink-2); cursor:pointer; transition:filter 140ms ease; white-space:nowrap; }
 .switch button.active{ background:linear-gradient(180deg, color-mix(in srgb, var(--accent) 92%, white), var(--accent));
   color:#fff; box-shadow:0 1px 0 rgba(255,255,255,.2) inset, 0 6px 16px -8px var(--accent); }
 .switch button.active:hover{ filter:brightness(1.06); }
 
-.grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
-@media (max-width:860px){ .grid{ grid-template-columns:1fr; } }
+/* ---------------- summary bar ---------------- */
+.summary-bar{ display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--border);
+  border:1px solid var(--border); border-radius:14px; overflow:hidden; margin-bottom:22px; box-shadow:var(--shadow); }
+.sb-item{ background:var(--surface); padding:14px 16px; min-width:0; }
+.sb-val{ font-size:21px; font-weight:700; letter-spacing:-.01em; }
+.sb-of{ font-size:13px; color:var(--muted); font-weight:500; }
+.sb-lbl{ font-size:11px; color:var(--muted); margin-top:4px; line-height:1.35; }
+@media (max-width:900px){ .summary-bar{ grid-template-columns:repeat(2,1fr); } }
+
+/* ---------------- filter bar ---------------- */
+.filter-bar{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:18px;
+  background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:12px 14px; box-shadow:var(--shadow); }
+.filter-bar label{ font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:600; margin-right:6px; }
+.filter-bar select, .filter-bar input[type=number]{ font-family:"Inter",sans-serif; font-size:12.5px; color:var(--ink-1);
+  background:var(--surface-2); border:1px solid var(--border-strong); border-radius:8px; padding:6px 9px; }
+.filter-group{ display:flex; align-items:center; gap:2px; }
+.filter-reset{ margin-left:auto; font-size:12px; font-weight:600; color:var(--accent-strong); background:none; border:0; cursor:pointer; }
+.filter-count{ font-size:11.5px; color:var(--muted); }
+
+.grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(360px, 1fr)); gap:18px; align-items:start; }
+@media (max-width:760px){ .grid{ grid-template-columns:1fr; } }
 
 .card{ background:linear-gradient(180deg, var(--hairline-top), transparent 42%), var(--surface);
   backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
   border:1px solid var(--border); border-radius:16px; padding:20px 22px; box-shadow:var(--shadow);
   display:flex; flex-direction:column; gap:14px; }
+.card[hidden]{ display:none; }
 .card-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }
 .card-name{ font-size:18px; font-weight:700; letter-spacing:-.01em; }
 .card-family{ font-size:11.5px; color:var(--muted); margin-top:2px; }
@@ -94,35 +145,44 @@ a{ color:inherit; text-decoration:none; }
 .headline-mini .hm-stat{ font-weight:700; font-size:15px; white-space:nowrap; }
 .headline-mini .hm-sentence{ font-size:12px; color:var(--ink-2); }
 
-.stat-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border);
+.stat-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border);
   border:1px solid var(--border); border-radius:12px; overflow:hidden; }
 .stat{ background:var(--page-2); padding:10px 12px; min-width:0; }
-.stat .s-lbl{ font-size:9.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:600; }
+.stat-primary{ box-shadow:inset 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent); }
+.stat-secondary{ opacity:.7; }
+.stat .s-lbl{ font-size:9.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:600; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
 .stat .s-val{ font-size:14.5px; font-weight:600; margin-top:3px; white-space:nowrap; }
 .good{ color:var(--good); } .bad{ color:var(--loss); }
 
-.btn{ display:block; text-align:center; background:linear-gradient(180deg, color-mix(in srgb, var(--accent) 92%, white), var(--accent));
+.sev-badge{ display:inline-flex; align-items:center; gap:3px; font-size:9px; font-weight:700; letter-spacing:0; text-transform:none; padding:1px 6px 1px 4px; border-radius:99px; }
+.sev-good{ color:var(--good); background:var(--good-soft); }
+.sev-ok{ color:var(--accent-strong); background:var(--accent-soft); }
+.sev-watch{ color:#8a6d1f; background:color-mix(in srgb, #C79A2E 16%, transparent); }
+.sev-bad{ color:var(--loss); background:var(--loss-soft); }
+.sev-flat{ color:var(--muted); background:var(--surface-3); }
+
+.btn{ display:flex; align-items:center; justify-content:center; gap:6px; background:linear-gradient(180deg, color-mix(in srgb, var(--accent) 92%, white), var(--accent));
   color:#fff; font-weight:600; font-size:13px; padding:11px 16px; border-radius:11px;
   box-shadow:0 1px 0 rgba(255,255,255,.2) inset, 0 8px 20px -10px var(--accent); transition:filter 140ms ease; }
 .btn:hover{ filter:brightness(1.07); }
+.btn svg{ color:#fff; }
 
 .history{ border-top:1px solid var(--border); padding-top:10px; }
 .history summary{ cursor:pointer; font-size:12px; color:var(--muted); font-weight:600; list-style:none; display:flex; align-items:center; gap:6px; }
-.history summary::before{ content:"▸"; display:inline-block; transition:transform 140ms ease; color:var(--accent); }
-.history[open] summary::before{ transform:rotate(90deg); }
+.history summary svg{ transition:transform 140ms ease; color:var(--accent); }
+.history[open] summary svg{ transform:rotate(90deg); }
 .history summary::-webkit-details-marker{ display:none; }
-.run-list{ display:flex; flex-direction:column; gap:6px; margin-top:10px; }
-.run-row{ display:grid; grid-template-columns:70px 1fr auto auto auto 14px; gap:12px; align-items:center;
-  background:var(--surface-2); border:1px solid var(--border); border-radius:9px; padding:8px 12px; font-size:11.5px;
-  transition:background 140ms ease, border-color 140ms ease; }
-.run-row:hover{ background:var(--surface-3); border-color:var(--border-strong); }
-.run-row .rr-inst{ font-weight:600; color:var(--ink-2); }
-.run-row .rr-range{ color:var(--muted); }
-.run-row .rr-stat{ color:var(--muted); white-space:nowrap; }
-.run-row .rr-pnl{ font-weight:600; white-space:nowrap; }
-.run-row .rr-sharpe{ color:var(--muted); white-space:nowrap; }
-.run-row .rr-arrow{ color:var(--accent); text-align:right; }
-@media (max-width:700px){ .run-row{ grid-template-columns:1fr; } .rr-arrow{ display:none; } }
+.run-table-wrap{ overflow-x:auto; margin-top:10px; }
+table.run-table{ width:100%; border-collapse:collapse; font-size:11.5px; min-width:560px; }
+table.run-table th{ text-align:left; color:var(--muted); font-size:10px; text-transform:uppercase; letter-spacing:.04em; font-weight:600;
+  padding:6px 8px; border-bottom:1px solid var(--border-strong); cursor:pointer; user-select:none; white-space:nowrap; }
+table.run-table th.num{ text-align:right; }
+table.run-table th:hover{ color:var(--ink-2); }
+table.run-table th.sorted{ color:var(--accent-strong); }
+table.run-table td{ padding:7px 8px; border-bottom:1px solid var(--border); white-space:nowrap; }
+table.run-table td.mono:not(:first-child){ text-align:right; }
+table.run-table tbody tr:hover{ background:var(--surface-2); }
+.row-open{ display:inline-flex; align-items:center; gap:4px; color:var(--accent-strong); font-weight:600; }
 
 footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); font-size:11px; color:var(--muted); font-family:"JetBrains Mono",monospace; }
 </style>
@@ -132,18 +192,50 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
 <div class="wrap">
   <div class="page-head">
     <div>
-      <div class="eyebrow">Options Data Layer</div>
+      <div class="brand-lockup"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2l7 4v8l-7 4-7-4V6z" stroke-linejoin="round"/><path d="M10 2v16M3 6l7 4 7-4" stroke-linejoin="round"/></svg><span class="word">MNCL <b>·</b> OPTIONS DESK</span><span class="rule"></span></div>
       <h1>Strategy Report Dashboard</h1>
-      <div class="sub"><b>6</b> strategies · <b>13</b> stored runs. Pick a strategy to open its full report — Overview, Mechanics, Performance, Deep-Dive and Ledger tabs, exactly as build_ledger.py wrote it.</div>
+      <div class="sub"><b>6</b> strategies · <b>13</b> stored runs. Headline metric is <b>R/MDD</b> (profit ÷ worst drawdown) - Sharpe is shown secondary. Pick a strategy to open its full report.</div>
     </div>
-    <div class="switch theme-switch" role="tablist" aria-label="Theme">
-      <button id="themeDark" class="active" role="tab" aria-selected="true">◑ Dark</button>
-      <button id="themeLight" role="tab" aria-selected="false">☀ Light</button>
+    <div class="page-head-right">
+      <div class="nav-links">
+        <a class="nav-link" href="portfolio.html"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M3 4.5c1.6-1 4-1 6 0v11c-2-1-4.4-1-6 0z"/><path d="M17 4.5c-1.6-1-4-1-6 0v11c2-1 4.4-1 6 0z"/></svg>Book View</a>
+      </div>
+      <div class="switch theme-switch" role="tablist" aria-label="Theme">
+        <button id="themeLight" class="active" role="tab" aria-selected="true"><svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="10" cy="10" r="3.6"/><path d="M10 2v2M10 16v2M18 10h-2M4 10H2M15.5 4.5l-1.4 1.4M5.9 14.1l-1.4 1.4M15.5 15.5l-1.4-1.4M5.9 5.9 4.5 4.5"/></svg>Executive</button>
+        <button id="themeDark" role="tab" aria-selected="false"><svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16.5 12.3A7 7 0 1 1 7.7 3.5a5.5 5.5 0 0 0 8.8 8.8z" stroke-linejoin="round"/></svg>Midnight</button>
+      </div>
     </div>
   </div>
-  <div class="grid">
+
+  
+    <div class="summary-bar">
+      <div class="sb-item"><div class="sb-val mono">6</div><div class="sb-lbl">Strategies</div></div>
+      <div class="sb-item"><div class="sb-val mono good">₹383,652</div><div class="sb-lbl">Combined Net P&amp;L (featured runs)</div></div>
+      <div class="sb-item"><div class="sb-val mono">4<span class="sb-of">/6</span></div><div class="sb-lbl">R/MDD ≥ 1 (adequate or better)</div></div>
+      <div class="sb-item"><div class="sb-val mono bad">2<span class="sb-of">/6</span></div><div class="sb-lbl">R/MDD &lt; 1 (thin or underwater)</div></div>
+      <div class="sb-item"><div class="sb-val mono">26d</div><div class="sb-lbl">Average sample size</div></div>
+    </div>
+
+  <div class="filter-bar">
+    <div class="filter-group"><label for="fInstrument">Instrument</label>
+      <select id="fInstrument"><option value="">All</option><option value="NIFTY">NIFTY</option><option value="SENSEX">SENSEX</option></select>
+    </div>
+    <div class="filter-group"><label for="fFamily">Mechanic</label>
+      <select id="fFamily"><option value="">All</option><option value="OI momentum">OI momentum</option><option value="Re-centering straddle">Re-centering straddle</option><option value="Short-premium ladder">Short-premium ladder</option><option value="Theta harvest">Theta harvest</option></select>
+    </div>
+    <div class="filter-group"><label for="fRmdd">Min R/MDD</label>
+      <input type="number" id="fRmdd" step="0.1" placeholder="e.g. 1.0" style="width:80px;">
+    </div>
+    <button class="filter-reset" id="fReset">Reset filters</button>
+    <span class="filter-count" id="fCount"></span>
+  </div>
+
+  <div class="grid" id="cardGrid">
     
-    <div class="card">
+    <div class="card" data-instruments="NIFTY" data-family="Short-premium ladder"
+         data-rmdd="4.117768595041323"
+         data-sharpe="2.9614365319713203"
+         data-pnl="12954.5">
       <div class="card-top">
         <div>
           <div class="card-name">Market Mover NF</div>
@@ -151,38 +243,58 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
         </div>
         <div class="chips"><span class="chip">NIFTY</span></div>
       </div>
-      <p class="card-thesis">Sell OTM5 calls and puts, let the side spot is moving away from ride down towards ATM, and keep re-pinning the far side back out to OTM5 - resetting to a fresh OTM5/OTM5 pair before the two strikes converge too close together.</p>
+      <p class="card-thesis">Sell OTM5 calls and puts. Leave untouched whichever side spot is moving toward, letting it ride down toward ATM; keep re-pinning whichever side spot is moving away from back out to a fresh OTM5 - resetting both legs before the two strikes converge too close together.</p>
       
 
       <div class="headline-mini">
-        <div class="hm-stat mono good">Sharpe 2.96, net of costs</div>
-        <div class="hm-sentence">A real, cost-surviving edge over the 27 days tested - still too short a sample to call it proven.</div>
+        <div class="hm-stat mono good">R/MDD 4.12, net of costs</div>
+        <div class="hm-sentence">Clears its own worst drawdown several times over across 27 expiry days (Sharpe 2.96 secondary) - a solid, cost-surviving edge, still too short a sample to call proven.</div>
       </div>
 
       <div class="stat-row">
+        <div class="stat stat-primary"><div class="s-lbl">R/MDD <span class="sev-badge sev-good"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>Strong</span></div><div class="s-val mono">4.12</div></div>
         <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹12,954</div></div>
-        <div class="stat"><div class="s-lbl">Sharpe</div><div class="s-val mono">2.96</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">Sharpe (secondary)</div><div class="s-val mono">2.96</div></div>
         <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹3,146</div></div>
         <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">27d / 253L</div></div>
       </div>
 
-      <a class="btn" href="market_mover_nf_20260911_130148_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-03-10 → 2026-09-08 →</a>
+      <a class="btn" href="market_mover_nf_20260911_130148_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-03-10 → 2026-09-08 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
       
         <details class="history">
-          <summary>1 earlier run</summary>
-          <div class="run-list">
-    <a class="run-row" href="market_mover_nf_20260910_170709_ledger.html" target="_blank" rel="noopener">
-      <span class="rr-inst">NIFTY</span>
-      <span class="rr-range mono">2026-03-10 → 2026-09-08</span>
-      <span class="rr-stat mono">27 days · 1013 legs</span>
-      <span class="rr-pnl mono good">₹10,072</span>
-      <span class="rr-sharpe mono">Sharpe 3.00</span>
-      <span class="rr-arrow">→</span>
-    </a></div>
+          <summary><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg><span>1 earlier run</span></summary>
+          <div class="run-table-wrap">
+            <table class="run-table" data-sort-table>
+              <thead><tr>
+                <th data-key="underlying">Instrument</th>
+                <th data-key="range">Date range</th>
+                <th data-key="days" class="num">Days</th>
+                <th data-key="legs" class="num">Legs</th>
+                <th data-key="pnl" class="num">Net P&amp;L</th>
+                <th data-key="sharpe" class="num">Sharpe</th>
+                <th data-key="rmdd" class="num">R/MDD</th>
+                <th></th>
+              </tr></thead>
+              <tbody>
+    <tr data-underlying="NIFTY" data-family="Short-premium ladder">
+      <td>NIFTY</td>
+      <td class="mono">2026-03-10 → 2026-09-08</td>
+      <td class="mono">27</td>
+      <td class="mono">1013</td>
+      <td class="mono good">₹10,072</td>
+      <td class="mono">3.00</td>
+      <td class="mono">3.31</td>
+      <td><a class="row-open" href="market_mover_nf_20260910_170709_ledger.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a></td>
+    </tr></tbody>
+            </table>
+          </div>
         </details>
     </div>
 
-    <div class="card">
+    <div class="card" data-instruments="SENSEX" data-family="Short-premium ladder"
+         data-rmdd="0.0832306040481966"
+         data-sharpe="0.1337851877292511"
+         data-pnl="2093.0">
       <div class="card-top">
         <div>
           <div class="card-name">Sensex Shifting Master</div>
@@ -194,22 +306,26 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       
 
       <div class="headline-mini">
-        <div class="hm-stat mono good">Sharpe 0.13 over 26 days</div>
-        <div class="hm-sentence">A thin, largely unproven edge at this sample size - not yet distinguishable from noise.</div>
+        <div class="hm-stat mono good">R/MDD 0.08, net of costs</div>
+        <div class="hm-sentence">Net-profitable over 26 expiry days, but total profit hasn't yet caught up to the worst drawdown endured to get there (Sharpe 0.13 secondary) - a thin margin for error at this sample size.</div>
       </div>
 
       <div class="stat-row">
+        <div class="stat stat-primary"><div class="s-lbl">R/MDD <span class="sev-badge sev-watch"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M10 3l8.5 14.5H1.5z"/><path d="M10 8v4" stroke-linecap="round"/><circle cx="10" cy="14.5" r="0.6" fill="currentColor" stroke="none"/></svg>Thin</span></div><div class="s-val mono">0.08</div></div>
         <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹2,093</div></div>
-        <div class="stat"><div class="s-lbl">Sharpe</div><div class="s-val mono">0.13</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">Sharpe (secondary)</div><div class="s-val mono">0.13</div></div>
         <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹25,147</div></div>
         <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">26d / 1371L</div></div>
       </div>
 
-      <a class="btn" href="sensex_shifting_master_20260910_164610_ledger.html" target="_blank" rel="noopener">Open latest report — SENSEX, 2026-03-12 → 2026-09-03 →</a>
+      <a class="btn" href="sensex_shifting_master_20260910_164610_ledger.html" target="_blank" rel="noopener">Open latest report — SENSEX, 2026-03-12 → 2026-09-03 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
       
     </div>
 
-    <div class="card">
+    <div class="card" data-instruments="NIFTY" data-family="Short-premium ladder"
+         data-rmdd="21.36254040824156"
+         data-sharpe="8.123482788066074"
+         data-pnl="33369.14176145551">
       <div class="card-top">
         <div>
           <div class="card-name">NF Shifting Master</div>
@@ -221,124 +337,174 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       
 
       <div class="headline-mini">
-        <div class="hm-stat mono good">Sharpe 8.12, net of costs</div>
-        <div class="hm-sentence">A real, cost-surviving edge over the 27 days tested - still too short a sample to call it proven.</div>
+        <div class="hm-stat mono good">R/MDD 21.36, net of costs</div>
+        <div class="hm-sentence">Profit runs several multiples of the worst drawdown over 27 expiry days (Sharpe 8.12 secondary) - a strong result by this desk's own R/MDD-first read, though still only 27 days of evidence.</div>
       </div>
 
       <div class="stat-row">
+        <div class="stat stat-primary"><div class="s-lbl">R/MDD <span class="sev-badge sev-good"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>Strong</span></div><div class="s-val mono">21.36</div></div>
         <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹33,369</div></div>
-        <div class="stat"><div class="s-lbl">Sharpe</div><div class="s-val mono">8.12</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">Sharpe (secondary)</div><div class="s-val mono">8.12</div></div>
         <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹1,562</div></div>
         <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">27d / 1413L</div></div>
       </div>
 
-      <a class="btn" href="nf_shifting_master_20260910_141350_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-03-10 → 2026-09-08 →</a>
+      <a class="btn" href="nf_shifting_master_20260910_141350_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-03-10 → 2026-09-08 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
       
     </div>
 
-    <div class="card">
+    <div class="card" data-instruments="NIFTY SENSEX" data-family="OI momentum"
+         data-rmdd="0.8273809523809524"
+         data-sharpe="0.5919328163587071"
+         data-pnl="3614.0000000000005">
       <div class="card-top">
         <div>
           <div class="card-name">Chakravyuh OI Recentre</div>
           <div class="card-family">Short premium / open-interest momentum</div>
         </div>
-        <div class="chips"><span class="chip">NIFTY</span><span class="chip">SENSEX</span></div>
+        <div class="chips"><span class="chip">NIFTY</span> <span class="chip">SENSEX</span></div>
       </div>
       <p class="card-thesis">Stay short whichever call and put currently carry the most open interest, rolling each leg independently the moment a new strike takes the lead.</p>
       <div class="card-featured-note">featured: latest NIFTY run (its default instrument) - other instruments below are compatibility checks, not tuned for it</div>
 
       <div class="headline-mini">
-        <div class="hm-stat mono good">Sharpe 0.59, net of costs</div>
-        <div class="hm-sentence">A real, cost-surviving edge over the 27 days tested - still too short a sample to call it proven.</div>
+        <div class="hm-stat mono good">R/MDD 0.83, net of costs</div>
+        <div class="hm-sentence">Net-profitable over 27 expiry days, but total profit hasn't yet caught up to the worst drawdown endured to get there (Sharpe 0.59 secondary) - a thin margin for error at this sample size.</div>
       </div>
 
       <div class="stat-row">
+        <div class="stat stat-primary"><div class="s-lbl">R/MDD <span class="sev-badge sev-watch"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M10 3l8.5 14.5H1.5z"/><path d="M10 8v4" stroke-linecap="round"/><circle cx="10" cy="14.5" r="0.6" fill="currentColor" stroke="none"/></svg>Thin</span></div><div class="s-val mono">0.83</div></div>
         <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹3,614</div></div>
-        <div class="stat"><div class="s-lbl">Sharpe</div><div class="s-val mono">0.59</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">Sharpe (secondary)</div><div class="s-val mono">0.59</div></div>
         <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹4,368</div></div>
         <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">27d / 180L</div></div>
       </div>
 
-      <a class="btn" href="chakravyuh_oi_recentre_20260909_213833_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-03-10 → 2026-09-08 →</a>
+      <a class="btn" href="chakravyuh_oi_recentre_20260909_213833_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-03-10 → 2026-09-08 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
       
         <details class="history">
-          <summary>3 earlier runs</summary>
-          <div class="run-list">
-    <a class="run-row" href="chakravyuh_oi_recentre_20260909_213602_ledger.html" target="_blank" rel="noopener">
-      <span class="rr-inst">SENSEX</span>
-      <span class="rr-range mono">2026-03-12 → 2026-09-03</span>
-      <span class="rr-stat mono">26 days · 0 legs</span>
-      <span class="rr-pnl mono ">₹0</span>
-      <span class="rr-sharpe mono">Sharpe —</span>
-      <span class="rr-arrow">→</span>
-    </a>
-    <a class="run-row" href="chakravyuh_oi_recentre_20260909_122713_ledger.html" target="_blank" rel="noopener">
-      <span class="rr-inst">NIFTY</span>
-      <span class="rr-range mono">2026-03-10 → 2026-09-01</span>
-      <span class="rr-stat mono">26 days · 174 legs</span>
-      <span class="rr-pnl mono good">₹2,506</span>
-      <span class="rr-sharpe mono">Sharpe 0.42</span>
-      <span class="rr-arrow">→</span>
-    </a>
-    <a class="run-row" href="chakravyuh_oi_recentre_20260909_112933_ledger.html" target="_blank" rel="noopener">
-      <span class="rr-inst">NIFTY</span>
-      <span class="rr-range mono">2026-03-10 → 2026-09-01</span>
-      <span class="rr-stat mono">26 days · 160 legs</span>
-      <span class="rr-pnl mono bad">−₹1,310</span>
-      <span class="rr-sharpe mono">Sharpe -0.23</span>
-      <span class="rr-arrow">→</span>
-    </a></div>
+          <summary><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg><span>3 earlier runs</span></summary>
+          <div class="run-table-wrap">
+            <table class="run-table" data-sort-table>
+              <thead><tr>
+                <th data-key="underlying">Instrument</th>
+                <th data-key="range">Date range</th>
+                <th data-key="days" class="num">Days</th>
+                <th data-key="legs" class="num">Legs</th>
+                <th data-key="pnl" class="num">Net P&amp;L</th>
+                <th data-key="sharpe" class="num">Sharpe</th>
+                <th data-key="rmdd" class="num">R/MDD</th>
+                <th></th>
+              </tr></thead>
+              <tbody>
+    <tr data-underlying="BSESEN" data-family="OI momentum">
+      <td>SENSEX</td>
+      <td class="mono">2026-03-12 → 2026-09-03</td>
+      <td class="mono">26</td>
+      <td class="mono">0</td>
+      <td class="mono ">₹0</td>
+      <td class="mono">—</td>
+      <td class="mono">—</td>
+      <td><a class="row-open" href="chakravyuh_oi_recentre_20260909_213602_ledger.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a></td>
+    </tr>
+    <tr data-underlying="NIFTY" data-family="OI momentum">
+      <td>NIFTY</td>
+      <td class="mono">2026-03-10 → 2026-09-01</td>
+      <td class="mono">26</td>
+      <td class="mono">174</td>
+      <td class="mono good">₹2,506</td>
+      <td class="mono">0.42</td>
+      <td class="mono">0.57</td>
+      <td><a class="row-open" href="chakravyuh_oi_recentre_20260909_122713_ledger.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a></td>
+    </tr>
+    <tr data-underlying="NIFTY" data-family="OI momentum">
+      <td>NIFTY</td>
+      <td class="mono">2026-03-10 → 2026-09-01</td>
+      <td class="mono">26</td>
+      <td class="mono">160</td>
+      <td class="mono bad">−₹1,310</td>
+      <td class="mono">-0.23</td>
+      <td class="mono">-0.30</td>
+      <td><a class="row-open" href="chakravyuh_oi_recentre_20260909_112933_ledger.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a></td>
+    </tr></tbody>
+            </table>
+          </div>
         </details>
     </div>
 
-    <div class="card">
+    <div class="card" data-instruments="NIFTY SENSEX" data-family="Theta harvest"
+         data-rmdd="1.4694312040045954"
+         data-sharpe="1.5020604048386392"
+         data-pnl="320349.1481746725">
       <div class="card-top">
         <div>
           <div class="card-name">Expiry-Day Short Straddle</div>
           <div class="card-family">Short premium / theta harvesting</div>
         </div>
-        <div class="chips"><span class="chip">NIFTY</span><span class="chip">SENSEX</span></div>
+        <div class="chips"><span class="chip">NIFTY</span> <span class="chip">SENSEX</span></div>
       </div>
       <p class="card-thesis">Sell time decay six times a day on expiry, cut losers wide and winners early.</p>
       <div class="card-featured-note">featured: latest NIFTY run (its default instrument) - other instruments below are compatibility checks, not tuned for it</div>
 
       <div class="headline-mini">
-        <div class="hm-stat mono good">Sharpe 1.50, net of costs</div>
-        <div class="hm-sentence">A real, cost-surviving edge over the 26 days tested - still too short a sample to call it proven.</div>
+        <div class="hm-stat mono good">R/MDD 1.47, net of costs</div>
+        <div class="hm-sentence">Net-profitable over 26 expiry days and ahead of its own worst drawdown, but not by a wide margin (Sharpe 1.50 secondary) - a real edge, not yet a comfortable one.</div>
       </div>
 
       <div class="stat-row">
+        <div class="stat stat-primary"><div class="s-lbl">R/MDD <span class="sev-badge sev-ok"><svg viewBox="0 0 20 20" width="12" height="12" fill="currentColor"><circle cx="10" cy="10" r="5"/></svg>Adequate</span></div><div class="s-val mono">1.47</div></div>
         <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹320,349</div></div>
-        <div class="stat"><div class="s-lbl">Sharpe</div><div class="s-val mono">1.50</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">Sharpe (secondary)</div><div class="s-val mono">1.50</div></div>
         <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹218,009</div></div>
         <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">26d / 312L</div></div>
       </div>
 
-      <a class="btn" href="short_straddle_20260909_122625_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-03-10 → 2026-09-01 →</a>
+      <a class="btn" href="short_straddle_20260909_122625_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-03-10 → 2026-09-01 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
       
         <details class="history">
-          <summary>2 earlier runs</summary>
-          <div class="run-list">
-    <a class="run-row" href="short_straddle_20260909_213257_ledger.html" target="_blank" rel="noopener">
-      <span class="rr-inst">SENSEX</span>
-      <span class="rr-range mono">2026-03-12 → 2026-09-03</span>
-      <span class="rr-stat mono">26 days · 306 legs</span>
-      <span class="rr-pnl mono bad">−₹161,371</span>
-      <span class="rr-sharpe mono">Sharpe -0.60</span>
-      <span class="rr-arrow">→</span>
-    </a>
-    <a class="run-row" href="short_straddle_20260908_124505_ledger.html" target="_blank" rel="noopener">
-      <span class="rr-inst">NIFTY</span>
-      <span class="rr-range mono">2026-03-10 → 2026-09-01</span>
-      <span class="rr-stat mono">26 days · 312 legs</span>
-      <span class="rr-pnl mono good">₹305,623</span>
-      <span class="rr-sharpe mono">Sharpe 1.43</span>
-      <span class="rr-arrow">→</span>
-    </a></div>
+          <summary><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg><span>2 earlier runs</span></summary>
+          <div class="run-table-wrap">
+            <table class="run-table" data-sort-table>
+              <thead><tr>
+                <th data-key="underlying">Instrument</th>
+                <th data-key="range">Date range</th>
+                <th data-key="days" class="num">Days</th>
+                <th data-key="legs" class="num">Legs</th>
+                <th data-key="pnl" class="num">Net P&amp;L</th>
+                <th data-key="sharpe" class="num">Sharpe</th>
+                <th data-key="rmdd" class="num">R/MDD</th>
+                <th></th>
+              </tr></thead>
+              <tbody>
+    <tr data-underlying="BSESEN" data-family="Theta harvest">
+      <td>SENSEX</td>
+      <td class="mono">2026-03-12 → 2026-09-03</td>
+      <td class="mono">26</td>
+      <td class="mono">306</td>
+      <td class="mono bad">−₹161,371</td>
+      <td class="mono">-0.60</td>
+      <td class="mono">-0.36</td>
+      <td><a class="row-open" href="short_straddle_20260909_213257_ledger.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a></td>
+    </tr>
+    <tr data-underlying="NIFTY" data-family="Theta harvest">
+      <td>NIFTY</td>
+      <td class="mono">2026-03-10 → 2026-09-01</td>
+      <td class="mono">26</td>
+      <td class="mono">312</td>
+      <td class="mono good">₹305,623</td>
+      <td class="mono">1.43</td>
+      <td class="mono">1.39</td>
+      <td><a class="row-open" href="short_straddle_20260908_124505_ledger.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a></td>
+    </tr></tbody>
+            </table>
+          </div>
         </details>
     </div>
 
-    <div class="card">
+    <div class="card" data-instruments="NIFTY" data-family="Re-centering straddle"
+         data-rmdd="1.0199959924701647"
+         data-sharpe="1.1743540615005683"
+         data-pnl="11272.003265581516">
       <div class="card-top">
         <div>
           <div class="card-name">NF ATM Straddle Recentre (DTE 0)</div>
@@ -350,30 +516,47 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       
 
       <div class="headline-mini">
-        <div class="hm-stat mono good">Sharpe 1.17, net of costs</div>
-        <div class="hm-sentence">A real, cost-surviving edge over the 26 days tested - still too short a sample to call it proven.</div>
+        <div class="hm-stat mono good">R/MDD 1.02, net of costs</div>
+        <div class="hm-sentence">Net-profitable over 26 expiry days and ahead of its own worst drawdown, but not by a wide margin (Sharpe 1.17 secondary) - a real edge, not yet a comfortable one.</div>
       </div>
 
       <div class="stat-row">
+        <div class="stat stat-primary"><div class="s-lbl">R/MDD <span class="sev-badge sev-ok"><svg viewBox="0 0 20 20" width="12" height="12" fill="currentColor"><circle cx="10" cy="10" r="5"/></svg>Adequate</span></div><div class="s-val mono">1.02</div></div>
         <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹11,272</div></div>
-        <div class="stat"><div class="s-lbl">Sharpe</div><div class="s-val mono">1.17</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">Sharpe (secondary)</div><div class="s-val mono">1.17</div></div>
         <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹11,051</div></div>
         <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">26d / 226L</div></div>
       </div>
 
-      <a class="btn" href="nf_atm_straddle_recentre_20260909_122638_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-03-10 → 2026-09-01 →</a>
+      <a class="btn" href="nf_atm_straddle_recentre_20260909_122638_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-03-10 → 2026-09-01 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
       
         <details class="history">
-          <summary>1 earlier run</summary>
-          <div class="run-list">
-    <a class="run-row" href="nf_atm_straddle_recentre_20260908_135917_ledger.html" target="_blank" rel="noopener">
-      <span class="rr-inst">NIFTY</span>
-      <span class="rr-range mono">2026-03-10 → 2026-09-01</span>
-      <span class="rr-stat mono">26 days · 222 legs</span>
-      <span class="rr-pnl mono good">₹540</span>
-      <span class="rr-sharpe mono">Sharpe 0.06</span>
-      <span class="rr-arrow">→</span>
-    </a></div>
+          <summary><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg><span>1 earlier run</span></summary>
+          <div class="run-table-wrap">
+            <table class="run-table" data-sort-table>
+              <thead><tr>
+                <th data-key="underlying">Instrument</th>
+                <th data-key="range">Date range</th>
+                <th data-key="days" class="num">Days</th>
+                <th data-key="legs" class="num">Legs</th>
+                <th data-key="pnl" class="num">Net P&amp;L</th>
+                <th data-key="sharpe" class="num">Sharpe</th>
+                <th data-key="rmdd" class="num">R/MDD</th>
+                <th></th>
+              </tr></thead>
+              <tbody>
+    <tr data-underlying="NIFTY" data-family="Re-centering straddle">
+      <td>NIFTY</td>
+      <td class="mono">2026-03-10 → 2026-09-01</td>
+      <td class="mono">26</td>
+      <td class="mono">222</td>
+      <td class="mono good">₹540</td>
+      <td class="mono">0.06</td>
+      <td class="mono">0.05</td>
+      <td><a class="row-open" href="nf_atm_straddle_recentre_20260908_135917_ledger.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a></td>
+    </tr></tbody>
+            </table>
+          </div>
         </details>
     </div>
   </div>
@@ -383,17 +566,75 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
 (function(){
   "use strict";
   function applyTheme(theme){
-    if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+    if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
     else document.documentElement.removeAttribute('data-theme');
     try { localStorage.setItem('reportsTheme', theme); } catch(e){}
-    document.getElementById('themeDark').classList.toggle('active', theme !== 'light');
-    document.getElementById('themeDark').setAttribute('aria-selected', theme !== 'light');
-    document.getElementById('themeLight').classList.toggle('active', theme === 'light');
-    document.getElementById('themeLight').setAttribute('aria-selected', theme === 'light');
+    document.getElementById('themeDark').classList.toggle('active', theme === 'dark');
+    document.getElementById('themeDark').setAttribute('aria-selected', theme === 'dark');
+    document.getElementById('themeLight').classList.toggle('active', theme !== 'dark');
+    document.getElementById('themeLight').setAttribute('aria-selected', theme !== 'dark');
   }
-  applyTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
+  applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
   document.getElementById('themeDark').addEventListener('click', function(){ applyTheme('dark'); });
   document.getElementById('themeLight').addEventListener('click', function(){ applyTheme('light'); });
+
+  // ---------------- card filters ----------------
+  var cards = Array.prototype.slice.call(document.querySelectorAll('#cardGrid .card'));
+  function applyFilters(){
+    var inst = document.getElementById('fInstrument').value;
+    var fam = document.getElementById('fFamily').value;
+    var minRmdd = parseFloat(document.getElementById('fRmdd').value);
+    var shown = 0;
+    cards.forEach(function(c){
+      var okInst = !inst || (c.getAttribute('data-instruments')||'').indexOf(inst) >= 0;
+      var okFam = !fam || c.getAttribute('data-family') === fam;
+      var rmddAttr = c.getAttribute('data-rmdd');
+      var okRmdd = isNaN(minRmdd) || (rmddAttr !== '' && parseFloat(rmddAttr) >= minRmdd);
+      var visible = okInst && okFam && okRmdd;
+      c.hidden = !visible;
+      if (visible) shown++;
+    });
+    document.getElementById('fCount').textContent = shown + ' of ' + cards.length + ' strategies shown';
+  }
+  ['fInstrument','fFamily','fRmdd'].forEach(function(id){
+    document.getElementById(id).addEventListener('input', applyFilters);
+  });
+  document.getElementById('fReset').addEventListener('click', function(){
+    document.getElementById('fInstrument').value = '';
+    document.getElementById('fFamily').value = '';
+    document.getElementById('fRmdd').value = '';
+    applyFilters();
+  });
+  applyFilters();
+
+  // ---------------- earlier-runs table sort (per card, independent) ----------------
+  document.querySelectorAll('table.run-table').forEach(function(table){
+    var state = { key: null, dir: 1 };
+    var COL_IDX = {underlying:0, range:1, days:2, legs:3, pnl:4, sharpe:5, rmdd:6};
+    function cellValue(tr, key){
+      var td = tr.children[COL_IDX[key]];
+      if (key === 'range') return td.textContent;
+      if (key === 'underlying') return td.textContent;
+      var n = parseFloat((td.textContent||'').replace(/[₹,−]/g,'').replace('−','-'));
+      return isNaN(n) ? -Infinity : n;
+    }
+    table.querySelectorAll('th[data-key]').forEach(function(th){
+      th.addEventListener('click', function(){
+        var key = th.getAttribute('data-key');
+        state.dir = (state.key === key) ? -state.dir : 1;
+        state.key = key;
+        table.querySelectorAll('th').forEach(function(h){ h.classList.toggle('sorted', h===th); });
+        var tbody = table.querySelector('tbody');
+        var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+        rows.sort(function(a,b){
+          var av = cellValue(a,key), bv = cellValue(b,key);
+          if (typeof av === 'string') return state.dir * av.localeCompare(bv);
+          return state.dir * (av - bv);
+        });
+        rows.forEach(function(r){ tbody.appendChild(r); });
+      });
+    });
+  });
 })();
 </script>
 </body>
