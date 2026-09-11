@@ -13,14 +13,14 @@
 <style>
 :root{
   color-scheme: light;
-  /* Same Monarch Networth Capital logo-derived palette as build_dashboard.py
-     and report_template.html - kept in sync by hand across all three. */
-  --mncl-navy:#0F2C47; --mncl-navy-2:#173F63;
-  --mncl-olive:#8DC63F; --mncl-olive-pale:#EEF7E0;
-  --mncl-blue:#1F6FB2; --mncl-teal:#1A8F94;
-  --mncl-red:#AE4B44; --mncl-red-pale:#FBEFEE;
-  --mncl-bg:#F2F6FA; --mncl-white:#FFFFFF; --mncl-border:#DCE4EC;
-  --mncl-text:#152A3E; --mncl-text-muted:#5A6C7D;
+  /* Same slate + blue/green/red palette as build_dashboard.py and
+     report_template.html - kept in sync by hand across all three. */
+  --mncl-navy:#0B1220; --mncl-navy-2:#16213A;
+  --mncl-olive:#15803D; --mncl-olive-pale:#DCFCE7;
+  --mncl-blue:#2563EB; --mncl-teal:#0891B2;
+  --mncl-red:#DC2626; --mncl-red-pale:#FEE2E2;
+  --mncl-bg:#F1F5F9; --mncl-white:#FFFFFF; --mncl-border:#E2E8F0;
+  --mncl-text:#0F172A; --mncl-text-muted:#475569;
   --page:var(--mncl-bg); --page-2:color-mix(in srgb, var(--mncl-white) 55%, var(--mncl-bg));
   --surface:var(--mncl-white); --surface-2:color-mix(in srgb, var(--mncl-white) 70%, var(--mncl-bg));
   --ink-1:var(--mncl-text); --ink-2:color-mix(in srgb, var(--mncl-text) 55%, var(--mncl-text-muted)); --muted:var(--mncl-text-muted);
@@ -154,7 +154,7 @@ var DATA = {"dates": ["2026-03-10", "2026-03-12", "2026-03-17", "2026-03-19", "2
   document.getElementById('themeDark').addEventListener('click', function(){ applyTheme('dark'); });
   document.getElementById('themeLight').addEventListener('click', function(){ applyTheme('light'); });
 
-  var PALETTE = ['#1F6FB2','#8DC63F','#AE4B44','#173F63','#1A8F94','#C79A2E','#5A6C7D'];
+  var PALETTE = ['#2563EB','#15803D','#DC2626','#16213A','#0891B2','#C2760C','#475569'];
   function fmtInr(n){ if (n==null) return '—'; var neg=n<0; n=Math.abs(n); var s=n.toLocaleString('en-IN',{maximumFractionDigits:0}); return (neg?'−₹':'₹')+s; }
 
   // ---------------- equity overlay chart ----------------

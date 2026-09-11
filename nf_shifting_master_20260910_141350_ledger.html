@@ -12,25 +12,21 @@
 <style>
 :root{
   color-scheme: light;
-  /* Palette derived from the real Monarch Networth Capital logo: the
-     wordmark's medium blue, the icon's green-to-teal gradient, and the
-     lime-green underline rule beneath the wordmark. Navy/navy-2 are darker
-     shades of that same blue family (not an unrelated hue) so the dark UI
-     chrome still reads as "the brand, darkened" rather than a different
-     brand. Red has no source in the logo - it's this build's own semantic
-     loss/risk color, kept deliberately desaturated so it never competes
-     with the brand blue/green for attention. */
-  --mncl-navy:#0F2C47; --mncl-navy-2:#173F63;
-  --mncl-olive:#8DC63F; --mncl-olive-pale:#EEF7E0;
-  --mncl-blue:#1F6FB2; --mncl-teal:#1A8F94;
-  --mncl-red:#AE4B44; --mncl-red-pale:#FBEFEE;
-  --mncl-bg:#F2F6FA; --mncl-white:#FFFFFF; --mncl-border:#DCE4EC;
-  --mncl-text:#152A3E; --mncl-text-muted:#5A6C7D;
+  /* Slate + blue/green/red - a high-contrast, professional palette (the
+     family used across most modern fintech dashboards) chosen for legible
+     numbers first: navy-black chrome, a vivid blue accent, and green/red
+     that both pass AA against white at the weights used here (bold, 13px+). */
+  --mncl-navy:#0B1220; --mncl-navy-2:#16213A;
+  --mncl-olive:#15803D; --mncl-olive-pale:#DCFCE7;
+  --mncl-blue:#2563EB; --mncl-teal:#0891B2;
+  --mncl-red:#DC2626; --mncl-red-pale:#FEE2E2;
+  --mncl-bg:#F1F5F9; --mncl-white:#FFFFFF; --mncl-border:#E2E8F0;
+  --mncl-text:#0F172A; --mncl-text-muted:#475569;
 
-  /* "Executive" - the brand default (light, professional). App tokens
-     mapped onto the palette above: navy is UI chrome (the sidebar/hero
-     panel below), blue is the one interactive accent, olive/red are the
-     only positive/negative colors used anywhere in this report. */
+  /* "Executive" - the light default. App tokens mapped onto the palette
+     above: navy is UI chrome (the sidebar/hero panel below), blue is the
+     one interactive accent, green/red are the only positive/negative
+     colors used anywhere in this report. */
   --page:var(--mncl-bg); --page-2:color-mix(in srgb, var(--mncl-white) 55%, var(--mncl-bg));
   --surface:var(--mncl-white); --surface-2:color-mix(in srgb, var(--mncl-white) 70%, var(--mncl-bg));
   --surface-3:color-mix(in srgb, var(--mncl-white) 40%, var(--mncl-bg));
@@ -45,18 +41,15 @@
   --loss:var(--mncl-red); --loss-text:var(--mncl-red); --loss-soft:var(--mncl-red-pale);
   --neutral-chip:color-mix(in srgb, var(--mncl-white) 70%, var(--mncl-bg)); --neutral-text:var(--ink-2);
   --shadow: 0 1px 2px rgba(9,30,61,.06), 0 16px 34px -18px rgba(9,30,61,.22);
-  /* Recessed chrome - navy, a literal match for the brand's own "primary
-     dark - headers, nav" role, for the sidebar/hero panel that should read
-     as sunken rather than raised glass. */
+  /* Recessed chrome - near-black navy, for the sidebar/hero panel that
+     should read as sunken rather than raised glass. */
   --term-bg:var(--mncl-navy); --term-bg-2:var(--mncl-navy-2); --term-border:rgba(255,255,255,.12);
   --term-text:rgba(255,255,255,.65); --term-text-strong:#ffffff; --term-accent:color-mix(in srgb, var(--mncl-blue) 75%, white);
   --term-good:var(--mncl-olive); --term-loss:color-mix(in srgb, var(--mncl-red) 80%, white);
 }
-/* "Midnight" - the dark variant, opt-in via the sidebar toggle. Only the
-   light ("Executive") values above trace to the logo directly; these dark
-   equivalents are this build's own reasoned extrapolation (the brand's blue
-   darkened for the background, accents re-checked for contrast on dark)
-   rather than a given spec value. */
+/* "Midnight" - the dark variant, opt-in via the sidebar toggle. Same blue/
+   green/red family, lightened via color-mix so each stays legible on the
+   near-black background instead of just reusing the light-mode values. */
 :root[data-theme="dark"]{
   color-scheme: dark;
   --page:var(--mncl-navy); --page-2:color-mix(in srgb, var(--mncl-navy) 85%, black);
