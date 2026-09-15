@@ -196,9 +196,9 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
   
     <div class="summary-bar">
       <div class="sb-item"><div class="sb-val mono">6</div><div class="sb-lbl">Strategies</div></div>
-      <div class="sb-item"><div class="sb-val mono good">₹383,652</div><div class="sb-lbl">Combined Net P&amp;L (featured runs)</div></div>
-      <div class="sb-item"><div class="sb-val mono">4<span class="sb-of">/6</span></div><div class="sb-lbl">Sharpe ≥ 1 (solid or better)</div></div>
-      <div class="sb-item"><div class="sb-val mono bad">2<span class="sb-of">/6</span></div><div class="sb-lbl">Sharpe &lt; 1 (modest or thin)</div></div>
+      <div class="sb-item"><div class="sb-val mono good">₹390,219</div><div class="sb-lbl">Combined Net P&amp;L (featured runs)</div></div>
+      <div class="sb-item"><div class="sb-val mono">5<span class="sb-of">/6</span></div><div class="sb-lbl">Sharpe ≥ 1 (solid or better)</div></div>
+      <div class="sb-item"><div class="sb-val mono bad">1<span class="sb-of">/6</span></div><div class="sb-lbl">Sharpe &lt; 1 (modest or thin)</div></div>
       <div class="sb-item"><div class="sb-val mono">26d</div><div class="sb-lbl">Average sample size</div></div>
     </div>
 
@@ -218,6 +218,68 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
 
   <div class="grid" id="cardGrid">
     
+    <div class="card" data-instruments="SENSEX" data-family="Short-premium ladder"
+         data-rmdd="7.8391819079729625"
+         data-sharpe="4.451815090789117"
+         data-pnl="22843.907746712004">
+      <div class="card-top">
+        <div>
+          <div class="card-name">Sensex Shifting Master</div>
+          <div class="card-family">Short premium / distance-from-spot ladder</div>
+        </div>
+        <div class="chips"><span class="chip">SENSEX</span></div>
+      </div>
+      <p class="card-thesis">Farm decay from a 3-strike short ladder on each side, sliding it to keep every leg at a fixed distance from live spot - the same mechanic as NF Shifting Master, pointed at SENSEX with its own risk parameters.</p>
+      
+
+      <div class="headline-mini">
+        <div class="hm-stat mono good">Sharpe 4.45, net of costs</div>
+        <div class="hm-sentence">Strong risk-adjusted edge over 26 expiry days (R/MDD 7.84).</div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-good"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>Strong</span></div><div class="s-val mono">4.45</div></div>
+        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹22,844</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">7.84</div></div>
+        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹2,914</div></div>
+        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">26d / 871L</div></div>
+      </div>
+
+      <a class="btn" href="sensex_shifting_master_20260915_123238_ledger.html" target="_blank" rel="noopener">Open latest report — SENSEX, 2026-03-12 → 2026-09-03 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
+      
+    </div>
+
+    <div class="card" data-instruments="NIFTY" data-family="Short-premium ladder"
+         data-rmdd="9.570528800199638"
+         data-sharpe="4.528756054478833"
+         data-pnl="19185.302997809">
+      <div class="card-top">
+        <div>
+          <div class="card-name">NF Shifting Master</div>
+          <div class="card-family">Short premium / distance-from-spot ladder</div>
+        </div>
+        <div class="chips"><span class="chip">NIFTY</span></div>
+      </div>
+      <p class="card-thesis">Farm decay from a 3-strike short ladder on each side, sliding it to keep every leg at a fixed distance from live spot.</p>
+      
+
+      <div class="headline-mini">
+        <div class="hm-stat mono good">Sharpe 4.53, net of costs</div>
+        <div class="hm-sentence">Strong risk-adjusted edge over 27 expiry days (R/MDD 9.57).</div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-good"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>Strong</span></div><div class="s-val mono">4.53</div></div>
+        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹19,185</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">9.57</div></div>
+        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹2,005</div></div>
+        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">27d / 508L</div></div>
+      </div>
+
+      <a class="btn" href="nf_shifting_master_20260915_123022_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-03-10 → 2026-09-08 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
+      
+    </div>
+
     <div class="card" data-instruments="NIFTY" data-family="Short-premium ladder"
          data-rmdd="4.117768595041323"
          data-sharpe="2.9614365319713203"
@@ -275,68 +337,6 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
             </table>
           </div>
         </details>
-    </div>
-
-    <div class="card" data-instruments="SENSEX" data-family="Short-premium ladder"
-         data-rmdd="0.0832306040481966"
-         data-sharpe="0.1337851877292511"
-         data-pnl="2093.0">
-      <div class="card-top">
-        <div>
-          <div class="card-name">Sensex Shifting Master</div>
-          <div class="card-family">Short premium / distance-from-spot ladder</div>
-        </div>
-        <div class="chips"><span class="chip">SENSEX</span></div>
-      </div>
-      <p class="card-thesis">Farm decay from a 3-strike short ladder on each side, sliding it to keep every leg at a fixed distance from live spot - the same mechanic as NF Shifting Master, pointed at SENSEX with its own risk parameters.</p>
-      
-
-      <div class="headline-mini">
-        <div class="hm-stat mono good">Sharpe 0.13, net of costs</div>
-        <div class="hm-sentence">Thin edge over 26 expiry days (R/MDD 0.08).</div>
-      </div>
-
-      <div class="stat-row">
-        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-bad"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 5l10 10M15 5L5 15"/></svg>Thin</span></div><div class="s-val mono">0.13</div></div>
-        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹2,093</div></div>
-        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">0.08</div></div>
-        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹25,147</div></div>
-        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">26d / 1371L</div></div>
-      </div>
-
-      <a class="btn" href="sensex_shifting_master_20260910_164610_ledger.html" target="_blank" rel="noopener">Open latest report — SENSEX, 2026-03-12 → 2026-09-03 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
-      
-    </div>
-
-    <div class="card" data-instruments="NIFTY" data-family="Short-premium ladder"
-         data-rmdd="21.36254040824156"
-         data-sharpe="8.123482788066074"
-         data-pnl="33369.14176145551">
-      <div class="card-top">
-        <div>
-          <div class="card-name">NF Shifting Master</div>
-          <div class="card-family">Short premium / distance-from-spot ladder</div>
-        </div>
-        <div class="chips"><span class="chip">NIFTY</span></div>
-      </div>
-      <p class="card-thesis">Farm decay from a 3-strike short ladder on each side, sliding it to keep every leg at a fixed distance from live spot.</p>
-      
-
-      <div class="headline-mini">
-        <div class="hm-stat mono good">Sharpe 8.12, net of costs</div>
-        <div class="hm-sentence">Strong risk-adjusted edge over 27 expiry days (R/MDD 21.36).</div>
-      </div>
-
-      <div class="stat-row">
-        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-good"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>Strong</span></div><div class="s-val mono">8.12</div></div>
-        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹33,369</div></div>
-        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">21.36</div></div>
-        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹1,562</div></div>
-        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">27d / 1413L</div></div>
-      </div>
-
-      <a class="btn" href="nf_shifting_master_20260910_141350_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-03-10 → 2026-09-08 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
-      
     </div>
 
     <div class="card" data-instruments="NIFTY SENSEX" data-family="OI momentum"
