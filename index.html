@@ -196,7 +196,7 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
   
     <div class="summary-bar">
       <div class="sb-item"><div class="sb-val mono">7</div><div class="sb-lbl">Strategies</div></div>
-      <div class="sb-item"><div class="sb-val mono good">₹431,909</div><div class="sb-lbl">Combined Net P&amp;L (featured runs)</div></div>
+      <div class="sb-item"><div class="sb-val mono good">₹421,156</div><div class="sb-lbl">Combined Net P&amp;L (featured runs)</div></div>
       <div class="sb-item"><div class="sb-val mono">5<span class="sb-of">/7</span></div><div class="sb-lbl">Sharpe ≥ 1 (solid or better)</div></div>
       <div class="sb-item"><div class="sb-val mono bad">2<span class="sb-of">/7</span></div><div class="sb-lbl">Sharpe &lt; 1 (modest or thin)</div></div>
       <div class="sb-item"><div class="sb-val mono">50d</div><div class="sb-lbl">Average sample size</div></div>
@@ -219,9 +219,9 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
   <div class="grid" id="cardGrid">
     
     <div class="card" data-instruments="NIFTY" data-family="Theta harvest"
-         data-rmdd="0.4663143756024542"
-         data-sharpe="0.25965561978591994"
-         data-pnl="15287.640705720525">
+         data-rmdd="0.1207079059879052"
+         data-sharpe="0.07949838887488725"
+         data-pnl="4535.573464292029">
       <div class="card-top">
         <div>
           <div class="card-name">NF Shaant Bazaar Ka Raja (Auto Straddle)</div>
@@ -229,23 +229,23 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
         </div>
         <div class="chips"><span class="chip">NIFTY</span></div>
       </div>
-      <p class="card-thesis">Sell the ATM straddle every trading day of the week, not just on expiry - re-enter fresh whenever that day's own decay/trailing trigger fires, and let the trigger get more sensitive the closer the day is to expiry.</p>
+      <p class="card-thesis">Sell the ATM straddle every trading day of the week, not just on expiry - re-enter fresh whenever that day's own trigger fires. DTE 1-4 re-centre on live spot drifting away from where the straddle was sold; DTE=0 re-centres on the combined premium itself decaying and bouncing off its own low.</p>
       
 
       <div class="headline-mini">
-        <div class="hm-stat mono good">32% of gross profit lost to costs</div>
-        <div class="hm-sentence">Costs take a real, non-trivial bite out of the gross edge - the net figure, not the gross one, is the honest read of this strategy.</div>
+        <div class="hm-stat mono good">70% of gross profit lost to costs</div>
+        <div class="hm-sentence">The strategy is gross-profitable, but more than half of that edge is consumed by brokerage, STT, and exchange charges before it reaches net P&amp;L.</div>
       </div>
 
       <div class="stat-row">
-        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-bad"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 5l10 10M15 5L5 15"/></svg>Thin</span></div><div class="s-val mono">0.26</div></div>
-        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹15,288</div></div>
-        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">0.47</div></div>
-        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹32,784</div></div>
-        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">173d / 724L</div></div>
+        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-bad"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 5l10 10M15 5L5 15"/></svg>Thin</span></div><div class="s-val mono">0.08</div></div>
+        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹4,536</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">0.12</div></div>
+        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹37,575</div></div>
+        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">173d / 930L</div></div>
       </div>
 
-      <a class="btn" href="nf_shaant_bazaar_ka_raja_20260916_153041_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-01-01 → 2026-09-15 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
+      <a class="btn" href="nf_shaant_bazaar_ka_raja_20260917_101923_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-01-01 → 2026-09-15 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
       
     </div>
 
