@@ -741,7 +741,7 @@ footer.page-footer{ margin-top:22px; padding-top:14px; border-top:1px solid var(
     var sampleOk = meta.days >= MIN_SAMPLE_DAYS;
     var items = [
       { l:'Net P&L', v: inr(netPnl.value,0), cls: valueClass('higher', netPnl.value), spark: sparkSvg(pnlVals,120,18,'var(--good)','var(--loss)') },
-      { l:'Sharpe (ann.)', v: sharpeTick.value.toFixed(2), cls: valueClass('higher', sharpeTick.value) },
+      { l:'Sharpe (ann.)', v: fmtByType(sharpeTick.value, 'num2'), cls: valueClass('higher', sharpeTick.value) },
       { l:'Max Drawdown', v: inr(maxdd.value,0), cls:'bad' },
       { l:'Day Win Rate', v: pct(winRate.value,0), cls:'' },
       { l:'Expense Ratio', v: pct(exp.value,1), cls:'' },
@@ -765,7 +765,7 @@ footer.page-footer{ margin-top:22px; padding-top:14px; border-top:1px solid var(
       ['Worst day', inr(worstDay, 0)],
       ['Avg win / loss (day)', inr(getMetric('day_edge','d_avg_win').value,0)+' / '+inr(getMetric('day_edge','d_avg_loss').value,0)],
       ['Longest win / loss streak', getMetric('day_edge','d_max_win_streak').value+' / '+getMetric('day_edge','d_max_loss_streak').value+' days'],
-      ['Recovery factor', getMetric('drawdown','recovery_factor').value.toFixed(2)],
+      ['Recovery factor', fmtByType(getMetric('drawdown','recovery_factor').value, 'num2')],
     ];
     $('quickFacts').innerHTML = rows.map(function(r){
       return '<div class="qf-row"><span class="qf-l">'+r[0]+'</span><span class="qf-v tabular">'+r[1]+'</span></div>';
@@ -784,11 +784,11 @@ footer.page-footer{ margin-top:22px; padding-top:14px; border-top:1px solid var(
         exp = getMetric('absolute','expense_ratio'), calmar = getMetric('risk','calmar');
     var tiles = [
       { hero:true, lbl:'Net P&L', v: fmtByType(netPnl.value,'inr0'), cls: valueClass('higher', netPnl.value), sub: meta.days+' expiry days', spark:true },
-      { lbl:'Sharpe', v: sharpe.value.toFixed(2), cls: valueClass('higher', sharpe.value), sub:'risk-adjusted return', primary:true },
-      { lbl:'Sortino', v: sortino.value.toFixed(2), cls: valueClass('higher', sortino.value), sub:'downside-only' },
+      { lbl:'Sharpe', v: fmtByType(sharpe.value,'num2'), cls: valueClass('higher', sharpe.value), sub:'risk-adjusted return', primary:true },
+      { lbl:'Sortino', v: fmtByType(sortino.value,'num2'), cls: valueClass('higher', sortino.value), sub:'downside-only' },
       { lbl:'Max Drawdown', v: fmtByType(maxdd.value,'inr0'), cls:'bad', sub:'peak to trough' },
-      { lbl:'R/MDD', v: rec.value.toFixed(2), cls: valueClass('higher', rec.value), sub:'profit ÷ worst DD · see Methodology', secondary:true },
-      { lbl:'Calmar', v: calmar.value.toFixed(2), cls: valueClass('higher', calmar.value), sub:'annualised R/MDD' },
+      { lbl:'R/MDD', v: fmtByType(rec.value,'num2'), cls: valueClass('higher', rec.value), sub:'profit ÷ worst DD · see Methodology', secondary:true },
+      { lbl:'Calmar', v: fmtByType(calmar.value,'num2'), cls: valueClass('higher', calmar.value), sub:'annualised R/MDD' },
       { lbl:'CAGR', v: fmtByType(cagr.value,'pct1'), cls: valueClass('higher', cagr.value), sub:'on '+inr(currentCapital(),0)+' capital' },
       { lbl:'Expense Ratio', v: fmtByType(exp.value,'pct1'), cls:'', sub: costsOn?'of gross P&L':'excluded' },
     ];
