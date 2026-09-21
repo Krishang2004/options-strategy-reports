@@ -180,7 +180,7 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
     <div>
       <div class="brand-lockup"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2l7 4v8l-7 4-7-4V6z" stroke-linejoin="round"/><path d="M10 2v16M3 6l7 4 7-4" stroke-linejoin="round"/></svg><span class="word">MNCL <b>·</b> OPTIONS DESK</span><span class="rule"></span></div>
       <h1>Strategy Report Dashboard</h1>
-      <div class="sub"><b>6</b> strategies · <b>13</b> stored runs. Headline metric is <b>Sharpe</b> (risk-adjusted return) - R/MDD is shown secondary. Pick a strategy to open its full report.</div>
+      <div class="sub"><b>6</b> strategies · <b>14</b> stored runs. Headline metric is <b>Sharpe</b> (risk-adjusted return) - R/MDD is shown secondary. Pick a strategy to open its full report.</div>
     </div>
     <div class="page-head-right">
       <div class="nav-links">
@@ -196,10 +196,10 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
   
     <div class="summary-bar">
       <div class="sb-item"><div class="sb-val mono">6</div><div class="sb-lbl">Strategies</div></div>
-      <div class="sb-item"><div class="sb-val mono good">₹416,621</div><div class="sb-lbl">Combined Net P&amp;L (featured runs)</div></div>
-      <div class="sb-item"><div class="sb-val mono">5<span class="sb-of">/6</span></div><div class="sb-lbl">Sharpe ≥ 1 (solid or better)</div></div>
+      <div class="sb-item"><div class="sb-val mono good">₹390,364</div><div class="sb-lbl">Combined Net P&amp;L (featured runs)</div></div>
+      <div class="sb-item"><div class="sb-val mono">4<span class="sb-of">/6</span></div><div class="sb-lbl">Sharpe ≥ 1 (solid or better)</div></div>
       <div class="sb-item"><div class="sb-val mono bad">1<span class="sb-of">/6</span></div><div class="sb-lbl">Sharpe &lt; 1 (modest or thin)</div></div>
-      <div class="sb-item"><div class="sb-val mono">30d</div><div class="sb-lbl">Average sample size</div></div>
+      <div class="sb-item"><div class="sb-val mono">24d</div><div class="sb-lbl">Average sample size</div></div>
     </div>
 
   <div class="filter-bar">
@@ -219,9 +219,9 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
   <div class="grid" id="cardGrid">
     
     <div class="card" data-instruments="SENSEX" data-family="Short-premium ladder"
-         data-rmdd="7.261392812341922"
-         data-sharpe="3.4433112884949857"
-         data-pnl="26209.065975792008">
+         data-rmdd="-1.0"
+         data-sharpe=""
+         data-pnl="-47.66120001200001">
       <div class="card-top">
         <div>
           <div class="card-name">Sensex Shifting Master</div>
@@ -233,20 +233,48 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       
 
       <div class="headline-mini">
-        <div class="hm-stat mono good">Sharpe 3.44, net of costs</div>
-        <div class="hm-sentence">Strong risk-adjusted edge over 36 expiry days (R/MDD 7.26).</div>
+        <div class="hm-stat mono bad">Net loss over the sample</div>
+        <div class="hm-sentence">Both gross and net results are negative over 1 expiry days - this is not a costs problem, the underlying idea lost money.</div>
       </div>
 
       <div class="stat-row">
-        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-good"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>Strong</span></div><div class="s-val mono">3.44</div></div>
-        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹26,209</div></div>
-        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">7.26</div></div>
-        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹3,609</div></div>
-        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">36d / 1244L</div></div>
+        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-flat"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 10h10"/></svg>N/A</span></div><div class="s-val mono">—</div></div>
+        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono bad">−₹48</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">-1.00</div></div>
+        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹48</div></div>
+        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">1d / 30L</div></div>
       </div>
 
-      <a class="btn" href="sensex_shifting_master_20260916_150537_ledger.html" target="_blank" rel="noopener">Open latest report — SENSEX, 2026-01-08 → 2026-09-10 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
+      <a class="btn" href="sensex_shifting_master_20260921_134821_ledger.html" target="_blank" rel="noopener">Open latest report — SENSEX, 2026-09-17 → 2026-09-17 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
       
+        <details class="history">
+          <summary><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg><span>1 earlier run</span></summary>
+          <div class="run-table-wrap">
+            <table class="run-table" data-sort-table>
+              <thead><tr>
+                <th data-key="underlying">Instrument</th>
+                <th data-key="range">Date range</th>
+                <th data-key="days" class="num">Days</th>
+                <th data-key="legs" class="num">Legs</th>
+                <th data-key="pnl" class="num">Net P&amp;L</th>
+                <th data-key="sharpe" class="num">Sharpe</th>
+                <th data-key="rmdd" class="num">R/MDD</th>
+                <th></th>
+              </tr></thead>
+              <tbody>
+    <tr data-underlying="BSESEN" data-family="Short-premium ladder">
+      <td>SENSEX</td>
+      <td class="mono">2026-01-08 → 2026-09-10</td>
+      <td class="mono">36</td>
+      <td class="mono">1244</td>
+      <td class="mono good">₹26,209</td>
+      <td class="mono">3.44</td>
+      <td class="mono">7.26</td>
+      <td><a class="row-open" href="sensex_shifting_master_20260916_150537_ledger.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a></td>
+    </tr></tbody>
+            </table>
+          </div>
+        </details>
     </div>
 
     <div class="card" data-instruments="NIFTY" data-family="Short-premium ladder"
