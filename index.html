@@ -180,7 +180,7 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
     <div>
       <div class="brand-lockup"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2l7 4v8l-7 4-7-4V6z" stroke-linejoin="round"/><path d="M10 2v16M3 6l7 4 7-4" stroke-linejoin="round"/></svg><span class="word">MNCL <b>·</b> OPTIONS DESK</span><span class="rule"></span></div>
       <h1>Strategy Report Dashboard</h1>
-      <div class="sub"><b>6</b> strategies · <b>14</b> stored runs. Headline metric is <b>Sharpe</b> (risk-adjusted return) - R/MDD is shown secondary. Pick a strategy to open its full report.</div>
+      <div class="sub"><b>6</b> strategies · <b>15</b> stored runs. Headline metric is <b>Sharpe</b> (risk-adjusted return) - R/MDD is shown secondary. Pick a strategy to open its full report.</div>
     </div>
     <div class="page-head-right">
       <div class="nav-links">
@@ -196,7 +196,7 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
   
     <div class="summary-bar">
       <div class="sb-item"><div class="sb-val mono">6</div><div class="sb-lbl">Strategies</div></div>
-      <div class="sb-item"><div class="sb-val mono good">₹416,573</div><div class="sb-lbl">Combined Net P&amp;L (featured runs)</div></div>
+      <div class="sb-item"><div class="sb-val mono good">₹415,465</div><div class="sb-lbl">Combined Net P&amp;L (featured runs)</div></div>
       <div class="sb-item"><div class="sb-val mono">5<span class="sb-of">/6</span></div><div class="sb-lbl">Sharpe ≥ 1 (solid or better)</div></div>
       <div class="sb-item"><div class="sb-val mono bad">1<span class="sb-of">/6</span></div><div class="sb-lbl">Sharpe &lt; 1 (modest or thin)</div></div>
       <div class="sb-item"><div class="sb-val mono">30d</div><div class="sb-lbl">Average sample size</div></div>
@@ -218,6 +218,65 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
 
   <div class="grid" id="cardGrid">
     
+    <div class="card" data-instruments="NIFTY" data-family="Short-premium ladder"
+         data-rmdd="20.509433649637142"
+         data-sharpe="4.147110558881817"
+         data-pnl="41113.6842170665">
+      <div class="card-top">
+        <div>
+          <div class="card-name">NF Shifting Master</div>
+          <div class="card-family">Short premium / distance-from-spot ladder</div>
+        </div>
+        <div class="chips"><span class="chip">NIFTY</span></div>
+      </div>
+      <p class="card-thesis">Farm decay from a 3-strike short ladder on each side, sliding it to keep every leg at a fixed distance from live spot.</p>
+      
+
+      <div class="headline-mini">
+        <div class="hm-stat mono good">Sharpe 4.15, net of costs</div>
+        <div class="hm-sentence">Strong risk-adjusted edge over 37 expiry days (R/MDD 20.51).</div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-good"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>Strong</span></div><div class="s-val mono">4.15</div></div>
+        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹41,114</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">20.51</div></div>
+        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹2,005</div></div>
+        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">37d / 740L</div></div>
+      </div>
+
+      <a class="btn" href="nf_shifting_master_20260921_143131_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-01-06 → 2026-09-15 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
+      
+        <details class="history">
+          <summary><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg><span>1 earlier run</span></summary>
+          <div class="run-table-wrap">
+            <table class="run-table" data-sort-table>
+              <thead><tr>
+                <th data-key="underlying">Instrument</th>
+                <th data-key="range">Date range</th>
+                <th data-key="days" class="num">Days</th>
+                <th data-key="legs" class="num">Legs</th>
+                <th data-key="pnl" class="num">Net P&amp;L</th>
+                <th data-key="sharpe" class="num">Sharpe</th>
+                <th data-key="rmdd" class="num">R/MDD</th>
+                <th></th>
+              </tr></thead>
+              <tbody>
+    <tr data-underlying="NIFTY" data-family="Short-premium ladder">
+      <td>NIFTY</td>
+      <td class="mono">2026-01-06 → 2026-09-08</td>
+      <td class="mono">36</td>
+      <td class="mono">722</td>
+      <td class="mono good">₹42,222</td>
+      <td class="mono">4.40</td>
+      <td class="mono">21.06</td>
+      <td><a class="row-open" href="nf_shifting_master_20260916_112402_ledger.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a></td>
+    </tr></tbody>
+            </table>
+          </div>
+        </details>
+    </div>
+
     <div class="card" data-instruments="SENSEX" data-family="Short-premium ladder"
          data-rmdd="7.248187965762712"
          data-sharpe="3.3794569504710386"
@@ -275,37 +334,6 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
             </table>
           </div>
         </details>
-    </div>
-
-    <div class="card" data-instruments="NIFTY" data-family="Short-premium ladder"
-         data-rmdd="21.062413666414066"
-         data-sharpe="4.399690864724929"
-         data-pnl="42222.2007259325">
-      <div class="card-top">
-        <div>
-          <div class="card-name">NF Shifting Master</div>
-          <div class="card-family">Short premium / distance-from-spot ladder</div>
-        </div>
-        <div class="chips"><span class="chip">NIFTY</span></div>
-      </div>
-      <p class="card-thesis">Farm decay from a 3-strike short ladder on each side, sliding it to keep every leg at a fixed distance from live spot.</p>
-      
-
-      <div class="headline-mini">
-        <div class="hm-stat mono good">Sharpe 4.40, net of costs</div>
-        <div class="hm-sentence">Strong risk-adjusted edge over 36 expiry days (R/MDD 21.06).</div>
-      </div>
-
-      <div class="stat-row">
-        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-good"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>Strong</span></div><div class="s-val mono">4.40</div></div>
-        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹42,222</div></div>
-        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">21.06</div></div>
-        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹2,005</div></div>
-        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">36d / 722L</div></div>
-      </div>
-
-      <a class="btn" href="nf_shifting_master_20260916_112402_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-01-06 → 2026-09-08 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
-      
     </div>
 
     <div class="card" data-instruments="NIFTY" data-family="Short-premium ladder"
