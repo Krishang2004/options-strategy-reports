@@ -180,7 +180,7 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
     <div>
       <div class="brand-lockup"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2l7 4v8l-7 4-7-4V6z" stroke-linejoin="round"/><path d="M10 2v16M3 6l7 4 7-4" stroke-linejoin="round"/></svg><span class="word">MNCL <b>·</b> OPTIONS DESK</span><span class="rule"></span></div>
       <h1>Strategy Report Dashboard</h1>
-      <div class="sub"><b>6</b> strategies · <b>15</b> stored runs. Headline metric is <b>Sharpe</b> (risk-adjusted return) - R/MDD is shown secondary. Pick a strategy to open its full report.</div>
+      <div class="sub"><b>6</b> strategies · <b>21</b> stored runs. Headline metric is <b>Sharpe</b> (risk-adjusted return) - R/MDD is shown secondary. Pick a strategy to open its full report.</div>
     </div>
     <div class="page-head-right">
       <div class="nav-links">
@@ -196,7 +196,7 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
   
     <div class="summary-bar">
       <div class="sb-item"><div class="sb-val mono">6</div><div class="sb-lbl">Strategies</div></div>
-      <div class="sb-item"><div class="sb-val mono good">₹415,465</div><div class="sb-lbl">Combined Net P&amp;L (featured runs)</div></div>
+      <div class="sb-item"><div class="sb-val mono good">₹394,246</div><div class="sb-lbl">Combined Net P&amp;L (featured runs)</div></div>
       <div class="sb-item"><div class="sb-val mono">5<span class="sb-of">/6</span></div><div class="sb-lbl">Sharpe ≥ 1 (solid or better)</div></div>
       <div class="sb-item"><div class="sb-val mono bad">1<span class="sb-of">/6</span></div><div class="sb-lbl">Sharpe &lt; 1 (modest or thin)</div></div>
       <div class="sb-item"><div class="sb-val mono">30d</div><div class="sb-lbl">Average sample size</div></div>
@@ -395,6 +395,115 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
         </details>
     </div>
 
+    <div class="card" data-instruments="NIFTY SENSEX" data-family="Theta harvest"
+         data-rmdd="1.3806345158628965"
+         data-sharpe="1.364598522201085"
+         data-pnl="299130.0">
+      <div class="card-top">
+        <div>
+          <div class="card-name">Expiry-Day Short Straddle</div>
+          <div class="card-family">Short premium / theta harvesting</div>
+        </div>
+        <div class="chips"><span class="chip">NIFTY</span> <span class="chip">SENSEX</span></div>
+      </div>
+      <p class="card-thesis">Sell time decay six times a day on expiry, cut losers wide and winners early.</p>
+      <div class="card-featured-note">featured: latest NIFTY run (its default instrument) - other instruments below are compatibility checks, not tuned for it</div>
+
+      <div class="headline-mini">
+        <div class="hm-stat mono good">Sharpe 1.36, net of costs</div>
+        <div class="hm-sentence">Solid, cost-surviving edge over 27 expiry days (R/MDD 1.38).</div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-ok"><svg viewBox="0 0 20 20" width="12" height="12" fill="currentColor"><circle cx="10" cy="10" r="5"/></svg>Solid</span></div><div class="s-val mono">1.36</div></div>
+        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹299,130</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">1.38</div></div>
+        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹216,661</div></div>
+        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">27d / 324L</div></div>
+      </div>
+
+      <a class="btn" href="short_straddle_20260910_141615_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-03-10 → 2026-09-08 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
+      
+        <details class="history">
+          <summary><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg><span>6 earlier runs</span></summary>
+          <div class="run-table-wrap">
+            <table class="run-table" data-sort-table>
+              <thead><tr>
+                <th data-key="underlying">Instrument</th>
+                <th data-key="range">Date range</th>
+                <th data-key="days" class="num">Days</th>
+                <th data-key="legs" class="num">Legs</th>
+                <th data-key="pnl" class="num">Net P&amp;L</th>
+                <th data-key="sharpe" class="num">Sharpe</th>
+                <th data-key="rmdd" class="num">R/MDD</th>
+                <th></th>
+              </tr></thead>
+              <tbody>
+    <tr data-underlying="BSESEN" data-family="Theta harvest">
+      <td>SENSEX</td>
+      <td class="mono">2026-03-12 → 2026-09-03</td>
+      <td class="mono">26</td>
+      <td class="mono">306</td>
+      <td class="mono bad">−₹161,371</td>
+      <td class="mono">-0.60</td>
+      <td class="mono">-0.36</td>
+      <td><a class="row-open" href="short_straddle_20260909_213257_ledger.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a></td>
+    </tr>
+    <tr data-underlying="NIFTY" data-family="Theta harvest">
+      <td>NIFTY</td>
+      <td class="mono">2026-03-10 → 2026-09-01</td>
+      <td class="mono">26</td>
+      <td class="mono">312</td>
+      <td class="mono good">₹320,349</td>
+      <td class="mono">1.50</td>
+      <td class="mono">1.47</td>
+      <td><a class="row-open" href="short_straddle_20260909_122625_ledger.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a></td>
+    </tr>
+    <tr data-underlying="NIFTY" data-family="Theta harvest">
+      <td>NIFTY</td>
+      <td class="mono">2026-03-10 → 2026-09-01</td>
+      <td class="mono">26</td>
+      <td class="mono">312</td>
+      <td class="mono good">₹305,623</td>
+      <td class="mono">1.43</td>
+      <td class="mono">1.39</td>
+      <td><a class="row-open" href="short_straddle_20260908_124505_ledger.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a></td>
+    </tr>
+    <tr data-underlying="NIFTY" data-family="Theta harvest">
+      <td>NIFTY</td>
+      <td class="mono">2026-03-10 → 2026-09-01</td>
+      <td class="mono">26</td>
+      <td class="mono">312</td>
+      <td class="mono good">₹328,884</td>
+      <td class="mono">1.54</td>
+      <td class="mono">1.52</td>
+      <td><a class="row-open" href="short_straddle_20260908_124421_ledger.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a></td>
+    </tr>
+    <tr data-underlying="NIFTY" data-family="Theta harvest">
+      <td>NIFTY</td>
+      <td class="mono">2026-03-10 → 2026-09-01</td>
+      <td class="mono">26</td>
+      <td class="mono">312</td>
+      <td class="mono good">₹328,884</td>
+      <td class="mono">1.54</td>
+      <td class="mono">1.52</td>
+      <td><a class="row-open" href="short_straddle_20260904_140459_ledger.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a></td>
+    </tr>
+    <tr data-underlying="NIFTY" data-family="Theta harvest">
+      <td>NIFTY</td>
+      <td class="mono">2026-03-10 → 2026-09-01</td>
+      <td class="mono">26</td>
+      <td class="mono">312</td>
+      <td class="mono good">₹328,884</td>
+      <td class="mono">1.54</td>
+      <td class="mono">1.52</td>
+      <td><a class="row-open" href="short_straddle_20260904_114456_ledger.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a></td>
+    </tr></tbody>
+            </table>
+          </div>
+        </details>
+    </div>
+
     <div class="card" data-instruments="NIFTY SENSEX" data-family="OI momentum"
          data-rmdd="0.8273809523809524"
          data-sharpe="0.5919328163587071"
@@ -425,7 +534,7 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       <a class="btn" href="chakravyuh_oi_recentre_20260909_213833_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-03-10 → 2026-09-08 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
       
         <details class="history">
-          <summary><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg><span>3 earlier runs</span></summary>
+          <summary><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg><span>4 earlier runs</span></summary>
           <div class="run-table-wrap">
             <table class="run-table" data-sort-table>
               <thead><tr>
@@ -468,75 +577,16 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       <td class="mono">-0.23</td>
       <td class="mono">-0.30</td>
       <td><a class="row-open" href="chakravyuh_oi_recentre_20260909_112933_ledger.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a></td>
-    </tr></tbody>
-            </table>
-          </div>
-        </details>
-    </div>
-
-    <div class="card" data-instruments="NIFTY SENSEX" data-family="Theta harvest"
-         data-rmdd="1.4694312040045954"
-         data-sharpe="1.5020604048386392"
-         data-pnl="320349.1481746725">
-      <div class="card-top">
-        <div>
-          <div class="card-name">Expiry-Day Short Straddle</div>
-          <div class="card-family">Short premium / theta harvesting</div>
-        </div>
-        <div class="chips"><span class="chip">NIFTY</span> <span class="chip">SENSEX</span></div>
-      </div>
-      <p class="card-thesis">Sell time decay six times a day on expiry, cut losers wide and winners early.</p>
-      <div class="card-featured-note">featured: latest NIFTY run (its default instrument) - other instruments below are compatibility checks, not tuned for it</div>
-
-      <div class="headline-mini">
-        <div class="hm-stat mono good">Sharpe 1.50, net of costs</div>
-        <div class="hm-sentence">Solid, cost-surviving edge over 26 expiry days (R/MDD 1.47).</div>
-      </div>
-
-      <div class="stat-row">
-        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-ok"><svg viewBox="0 0 20 20" width="12" height="12" fill="currentColor"><circle cx="10" cy="10" r="5"/></svg>Solid</span></div><div class="s-val mono">1.50</div></div>
-        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹320,349</div></div>
-        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">1.47</div></div>
-        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹218,009</div></div>
-        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">26d / 312L</div></div>
-      </div>
-
-      <a class="btn" href="short_straddle_20260909_122625_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-03-10 → 2026-09-01 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
-      
-        <details class="history">
-          <summary><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg><span>2 earlier runs</span></summary>
-          <div class="run-table-wrap">
-            <table class="run-table" data-sort-table>
-              <thead><tr>
-                <th data-key="underlying">Instrument</th>
-                <th data-key="range">Date range</th>
-                <th data-key="days" class="num">Days</th>
-                <th data-key="legs" class="num">Legs</th>
-                <th data-key="pnl" class="num">Net P&amp;L</th>
-                <th data-key="sharpe" class="num">Sharpe</th>
-                <th data-key="rmdd" class="num">R/MDD</th>
-                <th></th>
-              </tr></thead>
-              <tbody>
-    <tr data-underlying="BSESEN" data-family="Theta harvest">
-      <td>SENSEX</td>
-      <td class="mono">2026-03-12 → 2026-09-03</td>
-      <td class="mono">26</td>
-      <td class="mono">306</td>
-      <td class="mono bad">−₹161,371</td>
-      <td class="mono">-0.60</td>
-      <td class="mono">-0.36</td>
-      <td><a class="row-open" href="short_straddle_20260909_213257_ledger.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a></td>
     </tr>
-    <tr data-underlying="NIFTY" data-family="Theta harvest">
+    <tr data-underlying="NIFTY" data-family="OI momentum">
       <td>NIFTY</td>
       <td class="mono">2026-03-10 → 2026-09-01</td>
       <td class="mono">26</td>
-      <td class="mono">312</td>
-      <td class="mono good">₹305,623</td>
-      <td class="mono">1.43</td>
-      <td class="mono">1.39</td>
-      <td><a class="row-open" href="short_straddle_20260908_124505_ledger.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a></td>
+      <td class="mono">174</td>
+      <td class="mono good">₹2,532</td>
+      <td class="mono">0.43</td>
+      <td class="mono">0.58</td>
+      <td><a class="row-open" href="chakravyuh_oi_recentre_20260909_112858_ledger.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a></td>
     </tr></tbody>
             </table>
           </div>
@@ -573,7 +623,7 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       <a class="btn" href="nf_atm_straddle_recentre_20260909_122638_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-03-10 → 2026-09-01 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
       
         <details class="history">
-          <summary><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg><span>1 earlier run</span></summary>
+          <summary><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg><span>2 earlier runs</span></summary>
           <div class="run-table-wrap">
             <table class="run-table" data-sort-table>
               <thead><tr>
@@ -596,6 +646,16 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       <td class="mono">0.06</td>
       <td class="mono">0.05</td>
       <td><a class="row-open" href="nf_atm_straddle_recentre_20260908_135917_ledger.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a></td>
+    </tr>
+    <tr data-underlying="NIFTY" data-family="Re-centering straddle">
+      <td>NIFTY</td>
+      <td class="mono">2026-03-10 → 2026-09-01</td>
+      <td class="mono">26</td>
+      <td class="mono">226</td>
+      <td class="mono good">₹12,561</td>
+      <td class="mono">1.31</td>
+      <td class="mono">1.17</td>
+      <td><a class="row-open" href="nf_atm_straddle_recentre_20260908_135842_ledger.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a></td>
     </tr></tbody>
             </table>
           </div>
