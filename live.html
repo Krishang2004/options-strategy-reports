@@ -1,0 +1,158 @@
+<meta charset="UTF-8">
+<title>Live Forward Test</title>
+<script>
+(function(){ try{ if (localStorage.getItem('reportsTheme') === 'light')
+  document.documentElement.setAttribute('data-theme', 'light'); }catch(e){} })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  color-scheme: dark;
+  --page:#07080b; --surface:rgba(255,255,255,.035); --surface-2:rgba(255,255,255,.055);
+  --ink-1:#f5f7fb; --ink-2:#c1c9d6; --muted:#828b9c;
+  --border:rgba(255,255,255,.09); --border-strong:rgba(255,255,255,.18);
+  --accent:#0a84ff; --accent-strong:#5aabff; --accent-soft:rgba(10,132,255,.16);
+  --ce:#409cff; --ce-soft:rgba(64,156,255,.15); --pe:#ff9f0a; --pe-soft:rgba(255,159,10,.15);
+  --good:#30d158; --loss:#ff453a; --warn:#ffd60a; --warn-soft:rgba(255,214,10,.14);
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 16px 40px -18px rgba(0,0,0,.65);
+}
+:root[data-theme="light"]{
+  color-scheme: light;
+  --page:#f4f5f7; --surface:#ffffff; --surface-2:#eceef2;
+  --ink-1:#10141c; --ink-2:#4b5468; --muted:#8891a3;
+  --border:rgba(16,20,28,.10); --border-strong:rgba(16,20,28,.20);
+  --accent:#0a6bcf; --accent-strong:#0851a0; --accent-soft:#dbeafd;
+  --ce:#2a78d6; --ce-soft:#e4eefb; --pe:#c56a1f; --pe-soft:#fbe9e0;
+  --good:#0ca30c; --loss:#d03b3b; --warn:#a3720a; --warn-soft:#fbf1d6;
+  --shadow: 0 1px 2px rgba(16,20,28,.05), 0 10px 28px -14px rgba(16,20,28,.18);
+}
+*{box-sizing:border-box;} html,body{height:100%;}
+body{ background:var(--page); color:var(--ink-1); font-family:"Inter",system-ui,sans-serif; font-size:14px; line-height:1.5; margin:0; }
+.mono{ font-family:"JetBrains Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums; }
+.wrap{ max-width:1000px; margin:0 auto; padding:26px 24px 60px; }
+.back-link{ display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:600; color:var(--ink-2); text-decoration:none; margin-bottom:16px; }
+.back-link:hover{ color:var(--accent-strong); }
+.head{ display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:18px; }
+.head h1{ font-size:22px; font-weight:700; margin:0; }
+.pill{ display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:20px; text-transform:uppercase; letter-spacing:.04em; }
+.pill.live{ background:var(--good); color:#04220c; } .pill.live .dot{ animation: pulse 1.4s ease-in-out infinite; }
+.pill.stale{ background:var(--warn-soft); color:var(--warn); } .pill.idle{ background:var(--surface-2); color:var(--muted); }
+.pill .dot{ width:7px; height:7px; border-radius:50%; background:currentColor; display:inline-block; }
+@keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.35;} }
+.panel{ background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:18px 20px; margin-bottom:16px; box-shadow:var(--shadow); }
+.idle-panel{ text-align:center; padding:48px 24px; color:var(--ink-2); }
+.idle-panel .big{ font-size:16px; font-weight:600; color:var(--ink-1); margin-bottom:8px; }
+.idle-panel code{ display:inline-block; margin-top:10px; background:var(--surface-2); border:1px solid var(--border); border-radius:8px; padding:8px 14px; font-family:"JetBrains Mono",monospace; font-size:12.5px; color:var(--accent-strong); }
+.stale-banner{ display:flex; gap:10px; background:var(--warn-soft); color:var(--warn); border-radius:10px; padding:12px 16px; margin-bottom:16px; font-size:13px; }
+.tiles{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:16px; overflow:hidden; margin-bottom:16px; box-shadow:var(--shadow); }
+.tile{ background:var(--page); padding:16px 18px; }
+.tile .lbl{ font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:600; }
+.tile .val{ font-family:"JetBrains Mono",monospace; font-size:20px; font-weight:600; margin-top:6px; }
+.tile .val.good{ color:var(--good); } .tile .val.bad{ color:var(--loss); }
+.panel h2{ font-size:13.5px; font-weight:700; margin:0 0 12px; }
+table{ width:100%; border-collapse:collapse; font-size:12.5px; }
+th{ text-align:right; font-size:10px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); font-weight:600; padding:6px 10px; border-bottom:1px solid var(--border); }
+th:first-child, th:nth-child(2){ text-align:left; }
+td{ padding:7px 10px; text-align:right; font-family:"JetBrains Mono",monospace; border-bottom:1px solid var(--border); white-space:nowrap; }
+td:first-child, td:nth-child(2){ text-align:left; font-family:"Inter",sans-serif; }
+.chip{ display:inline-flex; font-size:10.5px; font-weight:600; padding:2px 7px; border-radius:5px; }
+.chip.ce{ background:var(--ce-soft); color:var(--ce); } .chip.pe{ background:var(--pe-soft); color:var(--pe); }
+.pos{ color:var(--good); } .neg{ color:var(--loss); }
+.empty-row td{ text-align:center; color:var(--muted); padding:16px; }
+.foot{ font-size:11px; color:var(--muted); margin-top:6px; }
+</style>
+<div class="wrap">
+  <a class="back-link" href="index.html">&larr; Dashboard</a>
+  <div class="head">
+    <h1 id="title">Live Forward Test</h1>
+    <span class="pill idle" id="statusPill"><span class="dot"></span><span id="statusText">Idle</span></span>
+  </div>
+  <div id="content"></div>
+</div>
+<script>
+(function(){
+  "use strict";
+  var $ = function(id){ return document.getElementById(id); };
+  function inr(n){ if (n==null||isNaN(n)) return '—';
+    var neg = n<0; n = Math.abs(n); var s = n.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return (neg?'−':'') + '₹' + s; }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+  function idleHtml(){
+    return '<div class="panel idle-panel"><div class="big">No forward test currently running.</div>'+
+      '<div>Start one from a terminal in the project folder:</div>'+
+      '<code>venv\\Scripts\\python.exe forward_test.py &lt;strategy_name&gt;</code></div>';
+  }
+  function staleHtml(lastUpdated){
+    return '<div class="stale-banner">&#9888; Stale since '+esc(lastUpdated)+
+      ' — the session may have stopped unexpectedly (e.g. a force-closed terminal). '+
+      'The numbers below are its last known state, not live.</div>';
+  }
+  function tilesHtml(d){
+    var tiles = [
+      { lbl:'Total P&amp;L', v: inr(d.total_pnl), cls: d.total_pnl>=0?'good':'bad' },
+      { lbl:'Realized', v: inr(d.realized_pnl), cls: d.realized_pnl>=0?'good':'bad' },
+      { lbl:'Open MTM', v: inr(d.open_mtm), cls: d.open_mtm>=0?'good':'bad' },
+      { lbl:'Trades so far', v: d.trades_count },
+    ];
+    return '<div class="tiles">'+tiles.map(function(t){
+      return '<div class="tile"><div class="lbl">'+t.lbl+'</div><div class="val '+(t.cls||'')+'">'+t.v+'</div></div>';
+    }).join('')+'</div>';
+  }
+  function positionsHtml(d){
+    var rows = (d.open_positions||[]).map(function(p){
+      var unreal = p.last_price==null ? null :
+        (p.qty<0 ? (p.entry_price-p.last_price) : (p.last_price-p.entry_price)) * Math.abs(p.qty);
+      return '<tr><td><span class="chip '+p.option_type.toLowerCase()+'">'+p.option_type+'</span></td>'+
+        '<td>'+p.strike+'</td><td>'+p.qty+'</td><td>'+p.entry_price.toFixed(2)+'</td>'+
+        '<td>'+(p.last_price==null?'—':p.last_price.toFixed(2))+'</td>'+
+        '<td class="'+(unreal>=0?'pos':'neg')+'">'+(unreal==null?'—':inr(unreal))+'</td></tr>';
+    }).join('') || '<tr class="empty-row"><td colspan="6">No open legs right now.</td></tr>';
+    return '<div class="panel"><h2>Open positions</h2><table><thead><tr>'+
+      '<th>Leg</th><th>Strike</th><th>Qty</th><th>Entry ₹</th><th>Last ₹</th><th>Unrealized</th>'+
+      '</tr></thead><tbody>'+rows+'</tbody></table></div>';
+  }
+  function tradesHtml(d){
+    var rows = (d.trades||[]).slice().reverse().map(function(t){
+      return '<tr><td><span class="chip '+t.option_type.toLowerCase()+'">'+t.option_type+'</span></td>'+
+        '<td>'+t.strike+'</td><td>'+esc(t.exit_reason)+'</td>'+
+        '<td class="'+(t.net_pnl>=0?'pos':'neg')+'">'+inr(t.net_pnl)+'</td></tr>';
+    }).join('') || '<tr class="empty-row"><td colspan="4">No trades closed yet.</td></tr>';
+    return '<div class="panel"><h2>Trades so far ('+(d.trades||[]).length+')</h2><table><thead><tr>'+
+      '<th>Leg</th><th>Strike</th><th>Exit</th><th>Net</th></tr></thead><tbody>'+rows+'</tbody></table>'+
+      '<div class="foot">Newest first. Full ledger is built once the session ends.</div></div>';
+  }
+
+  function setPill(cls, text){
+    var el = $('statusPill'); el.className = 'pill '+cls;
+    $('statusText').textContent = text;
+  }
+
+  function render(){
+    fetch('live_status.json', {cache:'no-store'}).then(function(r){
+      if (!r.ok) throw new Error('not found');
+      return r.json();
+    }).then(function(d){
+      $('title').textContent = (d.display_name||d.strategy)+' — '+d.date;
+      var ageMs = Date.now() - new Date(d.last_updated).getTime();
+      var staleAfter = (d.poll_interval_seconds||60) * 3 * 1000;
+      var html = '';
+      if (ageMs > staleAfter) {
+        setPill('stale', 'Stale');
+        html += staleHtml(d.last_updated);
+      } else {
+        setPill('live', 'Live · updated '+d.last_updated.slice(11));
+      }
+      html += tilesHtml(d) + positionsHtml(d) + tradesHtml(d);
+      $('content').innerHTML = html;
+    }).catch(function(){
+      $('title').textContent = 'Live Forward Test';
+      setPill('idle', 'Idle');
+      $('content').innerHTML = idleHtml();
+    });
+  }
+  render();
+  setInterval(render, 10000);
+})();
+</script>
