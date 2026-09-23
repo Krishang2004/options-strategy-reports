@@ -186,7 +186,7 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
     <div>
       <div class="brand-lockup"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2l7 4v8l-7 4-7-4V6z" stroke-linejoin="round"/><path d="M10 2v16M3 6l7 4 7-4" stroke-linejoin="round"/></svg><span class="word">MNCL <b>·</b> OPTIONS DESK</span><span class="rule"></span></div>
       <h1>Strategy Report Dashboard</h1>
-      <div class="sub"><b>6</b> strategies · <b>9</b> stored runs. Headline metric is <b>Sharpe</b> (risk-adjusted return) - R/MDD is shown secondary. Pick a strategy to open its full report.</div>
+      <div class="sub"><b>7</b> strategies · <b>10</b> stored runs. Headline metric is <b>Sharpe</b> (risk-adjusted return) - R/MDD is shown secondary. Pick a strategy to open its full report.</div>
     </div>
     <div class="page-head-right">
       <div class="nav-links">
@@ -202,11 +202,11 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
 
   
     <div class="summary-bar">
-      <div class="sb-item"><div class="sb-val mono">6</div><div class="sb-lbl">Strategies</div></div>
-      <div class="sb-item"><div class="sb-val mono good">₹394,246</div><div class="sb-lbl">Combined Net P&amp;L (featured runs)</div></div>
-      <div class="sb-item"><div class="sb-val mono">5<span class="sb-of">/6</span></div><div class="sb-lbl">Sharpe ≥ 1 (solid or better)</div></div>
-      <div class="sb-item"><div class="sb-val mono bad">1<span class="sb-of">/6</span></div><div class="sb-lbl">Sharpe &lt; 1 (modest or thin)</div></div>
-      <div class="sb-item"><div class="sb-val mono">30d</div><div class="sb-lbl">Average sample size</div></div>
+      <div class="sb-item"><div class="sb-val mono">7</div><div class="sb-lbl">Strategies</div></div>
+      <div class="sb-item"><div class="sb-val mono good">₹426,914</div><div class="sb-lbl">Combined Net P&amp;L (featured runs)</div></div>
+      <div class="sb-item"><div class="sb-val mono">6<span class="sb-of">/7</span></div><div class="sb-lbl">Sharpe ≥ 1 (solid or better)</div></div>
+      <div class="sb-item"><div class="sb-val mono bad">1<span class="sb-of">/7</span></div><div class="sb-lbl">Sharpe &lt; 1 (modest or thin)</div></div>
+      <div class="sb-item"><div class="sb-val mono">41d</div><div class="sb-lbl">Average sample size</div></div>
     </div>
 
   <div class="filter-bar">
@@ -214,7 +214,7 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       <select id="fInstrument"><option value="">All</option><option value="NIFTY">NIFTY</option><option value="SENSEX">SENSEX</option></select>
     </div>
     <div class="filter-group"><label for="fFamily">Mechanic</label>
-      <select id="fFamily"><option value="">All</option><option value="OI momentum">OI momentum</option><option value="Re-centering straddle">Re-centering straddle</option><option value="Short-premium ladder">Short-premium ladder</option><option value="Theta harvest">Theta harvest</option></select>
+      <select id="fFamily"><option value="">All</option><option value="OI momentum">OI momentum</option><option value="Premium reload">Premium reload</option><option value="Re-centering straddle">Re-centering straddle</option><option value="Short-premium ladder">Short-premium ladder</option><option value="Theta harvest">Theta harvest</option></select>
     </div>
     <div class="filter-group"><label for="fSharpe">Min Sharpe</label>
       <input type="number" id="fSharpe" step="0.1" placeholder="e.g. 1.0" style="width:80px;">
@@ -497,6 +497,38 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
             </table>
           </div>
         </details>
+    </div>
+<div class="section-header" data-family-header="Premium reload"><h2>Premium reload</h2><span class="sh-rule"></span><span class="sh-count">1 strategy</span></div>
+
+    <div class="card" data-instruments="NIFTY" data-family="Premium reload"
+         data-rmdd="2.5757042401898835"
+         data-sharpe="1.0229559633110745"
+         data-pnl="32668.620253470504">
+      <div class="card-top">
+        <div>
+          <div class="card-name">NF Premium Reload</div>
+          <div class="card-family">Short premium / premium-target reload</div>
+        </div>
+        <div class="chips"><span class="chip">NIFTY</span></div>
+      </div>
+      <p class="card-thesis">Sell a call and a put each targeting a fixed premium (~Rs 35), cut the pair tight on a combined stop, then reload single-leg on whichever side is winning with a looser stop - up to 3 fresh two-leg cycles a day.</p>
+      
+
+      <div class="headline-mini">
+        <div class="hm-stat mono good">Sharpe 1.02, net of costs</div>
+        <div class="hm-sentence">Solid, cost-surviving edge over 109 expiry days (R/MDD 2.58).</div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-ok"><svg viewBox="0 0 20 20" width="12" height="12" fill="currentColor"><circle cx="10" cy="10" r="5"/></svg>Solid</span></div><div class="s-val mono">1.02</div></div>
+        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹32,669</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">2.58</div></div>
+        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹12,683</div></div>
+        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">109d / 390L</div></div>
+      </div>
+
+      <a class="btn" href="nf_premium_reload_20260923_111515_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-01-02 → 2026-09-22 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
+      
     </div>
   </div>
   <footer>Generated by build_dashboard.py from results/*_metrics.json — read-only, no backtest re-run, no API calls.</footer>
