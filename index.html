@@ -131,10 +131,10 @@ svg{ display:block; flex:none; }
 .section-header .sh-rule{ flex:1; height:1px; background:var(--border); }
 .card-featured-note{ font-size:11px; color:var(--muted); font-style:italic; margin-top:-6px; }
 
-.headline-mini{ display:flex; gap:14px; align-items:center; background:var(--accent-soft);
+.headline-mini{ display:flex; flex-direction:column; gap:4px; background:var(--accent-soft);
   border:1px solid color-mix(in srgb, var(--accent) 30%, transparent); border-left:3px solid var(--accent);
   border-radius:12px; padding:10px 14px; }
-.headline-mini .hm-stat{ font-weight:700; font-size:15px; white-space:nowrap; }
+.headline-mini .hm-stat{ font-weight:700; font-size:15px; }
 .headline-mini .hm-sentence{ font-size:12px; color:var(--ink-2); }
 
 .stat-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border);
@@ -219,6 +219,9 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
     <div class="filter-group"><label for="fSharpe">Min Sharpe</label>
       <input type="number" id="fSharpe" step="0.1" placeholder="e.g. 1.0" style="width:80px;">
     </div>
+    <div class="filter-group"><label for="fDte">Trades DTE</label>
+      <select id="fDte"><option value="">All</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select>
+    </div>
     <button class="filter-reset" id="fReset">Reset filters</button>
     <span class="filter-count" id="fCount"></span>
   </div>
@@ -229,7 +232,8 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
     <div class="card" data-instruments="NIFTY" data-family="Short-premium ladder"
          data-rmdd="1.4837914680362552"
          data-sharpe="0.6072687753928617"
-         data-pnl="15001.578671254496">
+         data-pnl="15001.578671254496"
+         data-dte="0 1 2 3 4">
       <div class="card-top">
         <div>
           <div class="card-name">Market Mover NF</div>
@@ -298,7 +302,8 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
     <div class="card" data-instruments="NIFTY" data-family="Short-premium ladder"
          data-rmdd="0.3108808277497303"
          data-sharpe="0.19179822562357163"
-         data-pnl="7982.787702207511">
+         data-pnl="7982.787702207511"
+         data-dte="0 1 2 3 4">
       <div class="card-top">
         <div>
           <div class="card-name">NF Shifting Master</div>
@@ -329,7 +334,8 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
     <div class="card" data-instruments="SENSEX" data-family="Short-premium ladder"
          data-rmdd="-0.8399226738492097"
          data-sharpe="-0.8514302108943103"
-         data-pnl="-60198.605596966">
+         data-pnl="-60198.605596966"
+         data-dte="0 1 2 3 4">
       <div class="card-top">
         <div>
           <div class="card-name">Sensex Shifting Master</div>
@@ -361,7 +367,8 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
     <div class="card" data-instruments="NIFTY" data-family="Re-centering straddle"
          data-rmdd="0.8161630074492546"
          data-sharpe="0.5084180967969321"
-         data-pnl="18253.805095136027">
+         data-pnl="18253.805095136027"
+         data-dte="0 1 2 3 4">
       <div class="card-top">
         <div>
           <div class="card-name">NF ATM Straddle Recentre</div>
@@ -393,7 +400,8 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
     <div class="card" data-instruments="NIFTY SENSEX" data-family="OI momentum"
          data-rmdd="-0.12710537963654778"
          data-sharpe="-0.10229319110538893"
-         data-pnl="-2340.055443836505">
+         data-pnl="-2340.055443836505"
+         data-dte="0 1 2 3 4">
       <div class="card-top">
         <div>
           <div class="card-name">NF OI Recentre</div>
@@ -453,7 +461,8 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
     <div class="card" data-instruments="NIFTY SENSEX" data-family="Theta harvest"
          data-rmdd="0.038130949962939996"
          data-sharpe="0.022853233365212704"
-         data-pnl="21828.641234302704">
+         data-pnl="21828.641234302704"
+         data-dte="0 1 2 3 4">
       <div class="card-top">
         <div>
           <div class="card-name">1 Hour Straddles</div>
@@ -513,7 +522,8 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
     <div class="card" data-instruments="NIFTY" data-family="Premium reload"
          data-rmdd="2.5757042401898835"
          data-sharpe="1.0229559633110745"
-         data-pnl="32668.620253470504">
+         data-pnl="32668.620253470504"
+         data-dte="0 1 2 3 4">
       <div class="card-top">
         <div>
           <div class="card-name">NF Premium Reload</div>
@@ -566,6 +576,7 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
     var inst = document.getElementById('fInstrument').value;
     var fam = document.getElementById('fFamily').value;
     var minSharpe = parseFloat(document.getElementById('fSharpe').value);
+    var dte = document.getElementById('fDte').value;
     var shown = 0;
     var famShownCount = {};
     cards.forEach(function(c){
@@ -573,7 +584,8 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       var okFam = !fam || c.getAttribute('data-family') === fam;
       var sharpeAttr = c.getAttribute('data-sharpe');
       var okSharpe = isNaN(minSharpe) || (sharpeAttr !== '' && parseFloat(sharpeAttr) >= minSharpe);
-      var visible = okInst && okFam && okSharpe;
+      var okDte = !dte || (c.getAttribute('data-dte')||'').split(' ').indexOf(dte) >= 0;
+      var visible = okInst && okFam && okSharpe && okDte;
       c.hidden = !visible;
       if (visible){
         shown++;
@@ -589,13 +601,14 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
     });
     document.getElementById('fCount').textContent = shown + ' of ' + cards.length + ' strategies shown';
   }
-  ['fInstrument','fFamily','fSharpe'].forEach(function(id){
+  ['fInstrument','fFamily','fSharpe','fDte'].forEach(function(id){
     document.getElementById(id).addEventListener('input', applyFilters);
   });
   document.getElementById('fReset').addEventListener('click', function(){
     document.getElementById('fInstrument').value = '';
     document.getElementById('fFamily').value = '';
     document.getElementById('fSharpe').value = '';
+    document.getElementById('fDte').value = '';
     applyFilters();
   });
   applyFilters();
