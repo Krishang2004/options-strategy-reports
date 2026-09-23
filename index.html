@@ -245,16 +245,16 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       
 
       <div class="headline-mini">
-        <div class="hm-stat mono good">19% of gross profit lost to costs</div>
-        <div class="hm-sentence">Costs take a real, non-trivial bite out of the gross edge - the net figure, not the gross one, is the honest read of this strategy.</div>
+        <div class="hm-stat mono good" data-stat="headline_stat">19% of gross profit lost to costs</div>
+        <div class="hm-sentence" data-stat="headline_sentence">Costs take a real, non-trivial bite out of the gross edge - the net figure, not the gross one, is the honest read of this strategy.</div>
       </div>
 
       <div class="stat-row">
-        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-watch"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M10 3l8.5 14.5H1.5z"/><path d="M10 8v4" stroke-linecap="round"/><circle cx="10" cy="14.5" r="0.6" fill="currentColor" stroke="none"/></svg>Modest</span></div><div class="s-val mono">0.61</div></div>
-        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹15,002</div></div>
-        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">1.48</div></div>
-        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹10,110</div></div>
-        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">109d / 886L</div></div>
+        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-watch" data-stat="sharpe-badge"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M10 3l8.5 14.5H1.5z"/><path d="M10 8v4" stroke-linecap="round"/><circle cx="10" cy="14.5" r="0.6" fill="currentColor" stroke="none"/></svg>Modest</span></div><div class="s-val mono" data-stat="sharpe">0.61</div></div>
+        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good" data-stat="net_pnl">₹15,002</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono" data-stat="rmdd">1.48</div></div>
+        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad" data-stat="max_dd">−₹10,110</div></div>
+        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono" data-stat="sample">109d / 886L</div></div>
       </div>
 
       <a class="btn" href="market_mover_nf_20260923_120542_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-01-02 → 2026-09-22 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
@@ -297,6 +297,7 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
             </table>
           </div>
         </details>
+      <script type="application/json" class="dte-series-data">{"all": {"days": 109, "legs": 886, "net_pnl": 15001.578671254496, "sharpe": 0.6072687753928617, "rmdd": 1.4837914680362552, "max_dd": -10110.301207695005, "headline_stat": "19% of gross profit lost to costs", "headline_sentence": "Costs take a real, non-trivial bite out of the gross edge - the net figure, not the gross one, is the honest read of this strategy."}, "0": {"days": 38, "legs": 368, "net_pnl": 23204.850835179, "sharpe": 3.2449088956651373, "rmdd": 7.329064955891933, "max_dd": -3166.140698006, "headline_stat": "Sharpe 3.24, net of costs", "headline_sentence": "Strong risk-adjusted edge over 38 expiry days (R/MDD 7.33)."}, "1": {"days": 33, "legs": 254, "net_pnl": 10017.583478766493, "sharpe": 1.465831173302822, "rmdd": 1.9399398809127444, "max_dd": -5163.862848189505, "headline_stat": "Sharpe 1.47, net of costs", "headline_sentence": "Solid, cost-surviving edge over 33 expiry days (R/MDD 1.94)."}, "2": {"days": 1, "legs": 11, "net_pnl": -2526.8895340195004, "sharpe": null, "rmdd": -1.0, "max_dd": -2526.8895340195004, "headline_stat": "Net loss over the sample", "headline_sentence": "Both gross and net results are negative over 1 expiry days - this is not a costs problem, the underlying idea lost money."}, "3": {"days": 3, "legs": 28, "net_pnl": 3924.2427182854985, "sharpe": 3.8691266481125255, "rmdd": 4.37428026077356, "max_dd": -897.1173505905003, "headline_stat": "Sharpe 3.87, net of costs", "headline_sentence": "Strong risk-adjusted edge over 3 expiry days (R/MDD 4.37)."}, "4": {"days": 34, "legs": 225, "net_pnl": -19618.208826957, "sharpe": -2.401229160531137, "rmdd": -0.8592274750369638, "max_dd": -22832.38071049, "headline_stat": "Net loss over the sample", "headline_sentence": "Both gross and net results are negative over 34 expiry days - this is not a costs problem, the underlying idea lost money."}}</script>
     </div>
 
     <div class="card" data-instruments="NIFTY" data-family="Short-premium ladder"
@@ -315,20 +316,21 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       
 
       <div class="headline-mini">
-        <div class="hm-stat mono good">33% of gross profit lost to costs</div>
-        <div class="hm-sentence">Costs take a real, non-trivial bite out of the gross edge - the net figure, not the gross one, is the honest read of this strategy.</div>
+        <div class="hm-stat mono good" data-stat="headline_stat">33% of gross profit lost to costs</div>
+        <div class="hm-sentence" data-stat="headline_sentence">Costs take a real, non-trivial bite out of the gross edge - the net figure, not the gross one, is the honest read of this strategy.</div>
       </div>
 
       <div class="stat-row">
-        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-bad"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 5l10 10M15 5L5 15"/></svg>Thin</span></div><div class="s-val mono">0.19</div></div>
-        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹7,983</div></div>
-        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">0.31</div></div>
-        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹25,678</div></div>
-        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">109d / 1909L</div></div>
+        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-bad" data-stat="sharpe-badge"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 5l10 10M15 5L5 15"/></svg>Thin</span></div><div class="s-val mono" data-stat="sharpe">0.19</div></div>
+        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good" data-stat="net_pnl">₹7,983</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono" data-stat="rmdd">0.31</div></div>
+        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad" data-stat="max_dd">−₹25,678</div></div>
+        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono" data-stat="sample">109d / 1909L</div></div>
       </div>
 
       <a class="btn" href="nf_shifting_master_20260923_122131_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-01-02 → 2026-09-22 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
       
+      <script type="application/json" class="dte-series-data">{"all": {"days": 109, "legs": 1909, "net_pnl": 7982.787702207511, "sharpe": 0.19179822562357163, "rmdd": 0.3108808277497303, "max_dd": -25677.967213320495, "headline_stat": "33% of gross profit lost to costs", "headline_sentence": "Costs take a real, non-trivial bite out of the gross edge - the net figure, not the gross one, is the honest read of this strategy."}, "0": {"days": 38, "legs": 754, "net_pnl": 41099.102348030996, "sharpe": 4.073564420677379, "rmdd": 20.502159529568203, "max_dd": -2004.623088058499, "headline_stat": "Sharpe 4.07, net of costs", "headline_sentence": "Strong risk-adjusted edge over 38 expiry days (R/MDD 20.50)."}, "1": {"days": 33, "legs": 552, "net_pnl": 7507.191059849005, "sharpe": 0.7101915120784621, "rmdd": 0.8774174040450579, "max_dd": -8556.008833697, "headline_stat": "Sharpe 0.71, net of costs", "headline_sentence": "Modest edge over 33 expiry days (R/MDD 0.88)."}, "2": {"days": 1, "legs": 32, "net_pnl": -11493.497147613, "sharpe": null, "rmdd": -1.0, "max_dd": -11493.497147613, "headline_stat": "Net loss over the sample", "headline_sentence": "Both gross and net results are negative over 1 expiry days - this is not a costs problem, the underlying idea lost money."}, "3": {"days": 3, "legs": 47, "net_pnl": 2480.0807567055, "sharpe": 1.7515469585676469, "rmdd": 0.8474078846994976, "max_dd": -2926.6670767230003, "headline_stat": "Sharpe 1.75, net of costs", "headline_sentence": "Solid, cost-surviving edge over 3 expiry days (R/MDD 0.85)."}, "4": {"days": 34, "legs": 524, "net_pnl": -31610.089314764995, "sharpe": -2.3008294544650014, "rmdd": -0.7577177253066488, "max_dd": -41717.500144229, "headline_stat": "Net loss over the sample", "headline_sentence": "Both gross and net results are negative over 34 expiry days - this is not a costs problem, the underlying idea lost money."}}</script>
     </div>
 
     <div class="card" data-instruments="SENSEX" data-family="Short-premium ladder"
@@ -347,20 +349,21 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       
 
       <div class="headline-mini">
-        <div class="hm-stat mono bad">Net loss over the sample</div>
-        <div class="hm-sentence">Both gross and net results are negative over 142 expiry days - this is not a costs problem, the underlying idea lost money.</div>
+        <div class="hm-stat mono bad" data-stat="headline_stat">Net loss over the sample</div>
+        <div class="hm-sentence" data-stat="headline_sentence">Both gross and net results are negative over 142 expiry days - this is not a costs problem, the underlying idea lost money.</div>
       </div>
 
       <div class="stat-row">
-        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-bad"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 5l10 10M15 5L5 15"/></svg>Thin</span></div><div class="s-val mono">-0.85</div></div>
-        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono bad">−₹60,199</div></div>
-        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">-0.84</div></div>
-        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹71,672</div></div>
-        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">142d / 3994L</div></div>
+        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-bad" data-stat="sharpe-badge"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 5l10 10M15 5L5 15"/></svg>Thin</span></div><div class="s-val mono" data-stat="sharpe">-0.85</div></div>
+        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono bad" data-stat="net_pnl">−₹60,199</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono" data-stat="rmdd">-0.84</div></div>
+        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad" data-stat="max_dd">−₹71,672</div></div>
+        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono" data-stat="sample">142d / 3994L</div></div>
       </div>
 
       <a class="btn" href="sensex_shifting_master_20260923_132329_ledger.html" target="_blank" rel="noopener">Open latest report — SENSEX, 2026-01-01 → 2026-09-17 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
       
+      <script type="application/json" class="dte-series-data">{"all": {"days": 142, "legs": 3994, "net_pnl": -60198.605596966, "sharpe": -0.8514302108943103, "rmdd": -0.8399226738492097, "max_dd": -71671.604388398, "headline_stat": "Net loss over the sample", "headline_sentence": "Both gross and net results are negative over 142 expiry days - this is not a costs problem, the underlying idea lost money."}, "0": {"days": 38, "legs": 1296, "net_pnl": 23760.067270684005, "sharpe": 3.5569734589731743, "rmdd": 7.103176146860957, "max_dd": -3344.991983787996, "headline_stat": "Sharpe 3.56, net of costs", "headline_sentence": "Strong risk-adjusted edge over 38 expiry days (R/MDD 7.10)."}, "1": {"days": 37, "legs": 1071, "net_pnl": -42137.604680292, "sharpe": -2.3181046399350556, "rmdd": -0.9368966151063448, "max_dd": -44975.725177008, "headline_stat": "Net loss over the sample", "headline_sentence": "Both gross and net results are negative over 37 expiry days - this is not a costs problem, the underlying idea lost money."}, "2": {"days": 34, "legs": 907, "net_pnl": 39877.08776249, "sharpe": 2.0493098637519274, "rmdd": 4.6611410368843424, "max_dd": -8555.220158956, "headline_stat": "Sharpe 2.05, net of costs", "headline_sentence": "Strong risk-adjusted edge over 34 expiry days (R/MDD 4.66)."}, "3": {"days": 32, "legs": 659, "net_pnl": -73137.869324512, "sharpe": -4.478694598123799, "rmdd": -0.9640251414989396, "max_dd": -75867.180404436, "headline_stat": "Net loss over the sample", "headline_sentence": "Both gross and net results are negative over 32 expiry days - this is not a costs problem, the underlying idea lost money."}, "4": {"days": 1, "legs": 61, "net_pnl": -8560.286625336003, "sharpe": null, "rmdd": -1.0, "max_dd": -8560.286625336003, "headline_stat": "Net loss over the sample", "headline_sentence": "Both gross and net results are negative over 1 expiry days - this is not a costs problem, the underlying idea lost money."}}</script>
     </div>
 <div class="section-header" data-family-header="Re-centering straddle"><h2>Re-centering straddle</h2><span class="sh-rule"></span><span class="sh-count">1 strategy</span></div>
 
@@ -380,20 +383,21 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       
 
       <div class="headline-mini">
-        <div class="hm-stat mono good">22% of gross profit lost to costs</div>
-        <div class="hm-sentence">Costs take a real, non-trivial bite out of the gross edge - the net figure, not the gross one, is the honest read of this strategy.</div>
+        <div class="hm-stat mono good" data-stat="headline_stat">22% of gross profit lost to costs</div>
+        <div class="hm-sentence" data-stat="headline_sentence">Costs take a real, non-trivial bite out of the gross edge - the net figure, not the gross one, is the honest read of this strategy.</div>
       </div>
 
       <div class="stat-row">
-        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-watch"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M10 3l8.5 14.5H1.5z"/><path d="M10 8v4" stroke-linecap="round"/><circle cx="10" cy="14.5" r="0.6" fill="currentColor" stroke="none"/></svg>Modest</span></div><div class="s-val mono">0.51</div></div>
-        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹18,254</div></div>
-        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">0.82</div></div>
-        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹22,365</div></div>
-        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">109d / 544L</div></div>
+        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-watch" data-stat="sharpe-badge"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M10 3l8.5 14.5H1.5z"/><path d="M10 8v4" stroke-linecap="round"/><circle cx="10" cy="14.5" r="0.6" fill="currentColor" stroke="none"/></svg>Modest</span></div><div class="s-val mono" data-stat="sharpe">0.51</div></div>
+        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good" data-stat="net_pnl">₹18,254</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono" data-stat="rmdd">0.82</div></div>
+        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad" data-stat="max_dd">−₹22,365</div></div>
+        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono" data-stat="sample">109d / 544L</div></div>
       </div>
 
       <a class="btn" href="nf_atm_straddle_recentre_20260923_122459_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-01-02 → 2026-09-22 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
       
+      <script type="application/json" class="dte-series-data">{"all": {"days": 109, "legs": 544, "net_pnl": 18253.805095136027, "sharpe": 0.5084180967969321, "rmdd": 0.8161630074492546, "max_dd": -22365.391384478997, "headline_stat": "22% of gross profit lost to costs", "headline_sentence": "Costs take a real, non-trivial bite out of the gross edge - the net figure, not the gross one, is the honest read of this strategy."}, "0": {"days": 38, "legs": 334, "net_pnl": 13725.004092878018, "sharpe": 1.0116214928578773, "rmdd": 1.2419663871211595, "max_dd": -11051.027012649, "headline_stat": "Sharpe 1.01, net of costs", "headline_sentence": "Solid, cost-surviving edge over 38 expiry days (R/MDD 1.24)."}, "1": {"days": 33, "legs": 108, "net_pnl": 19872.57955709651, "sharpe": 1.9671588172829881, "rmdd": 2.967777815201389, "max_dd": -6696.114330158502, "headline_stat": "Sharpe 1.97, net of costs", "headline_sentence": "Solid, cost-surviving edge over 33 expiry days (R/MDD 2.97)."}, "2": {"days": 1, "legs": 4, "net_pnl": -5194.073743748503, "sharpe": null, "rmdd": -1.0, "max_dd": -5194.073743748503, "headline_stat": "Net loss over the sample", "headline_sentence": "Both gross and net results are negative over 1 expiry days - this is not a costs problem, the underlying idea lost money."}, "3": {"days": 3, "legs": 6, "net_pnl": 2394.166463357499, "sharpe": 3.620962179062547, "rmdd": 2.5546261508171555, "max_dd": -937.1885833830012, "headline_stat": "Sharpe 3.62, net of costs", "headline_sentence": "Strong risk-adjusted edge over 3 expiry days (R/MDD 2.55)."}, "4": {"days": 34, "legs": 92, "net_pnl": -12543.871274447492, "sharpe": -1.2249024563498505, "rmdd": -0.5511595500082703, "max_dd": -22759.056382601495, "headline_stat": "Net loss over the sample", "headline_sentence": "Both gross and net results are negative over 34 expiry days - this is not a costs problem, the underlying idea lost money."}}</script>
     </div>
 <div class="section-header" data-family-header="OI momentum"><h2>OI momentum</h2><span class="sh-rule"></span><span class="sh-count">1 strategy</span></div>
 
@@ -413,16 +417,16 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       <div class="card-featured-note">featured: latest NIFTY run (its default instrument) - other instruments below are compatibility checks, not tuned for it</div>
 
       <div class="headline-mini">
-        <div class="hm-stat mono bad">210% of gross profit lost to costs</div>
-        <div class="hm-sentence">Gross-profitable over 109 expiry days, but transaction costs alone turn the net result negative.</div>
+        <div class="hm-stat mono bad" data-stat="headline_stat">210% of gross profit lost to costs</div>
+        <div class="hm-sentence" data-stat="headline_sentence">Gross-profitable over 109 expiry days, but transaction costs alone turn the net result negative.</div>
       </div>
 
       <div class="stat-row">
-        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-bad"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 5l10 10M15 5L5 15"/></svg>Thin</span></div><div class="s-val mono">-0.10</div></div>
-        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono bad">−₹2,340</div></div>
-        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">-0.13</div></div>
-        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹18,410</div></div>
-        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">109d / 652L</div></div>
+        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-bad" data-stat="sharpe-badge"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 5l10 10M15 5L5 15"/></svg>Thin</span></div><div class="s-val mono" data-stat="sharpe">-0.10</div></div>
+        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono bad" data-stat="net_pnl">−₹2,340</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono" data-stat="rmdd">-0.13</div></div>
+        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad" data-stat="max_dd">−₹18,410</div></div>
+        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono" data-stat="sample">109d / 652L</div></div>
       </div>
 
       <a class="btn" href="chakravyuh_oi_recentre_20260923_115841_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-01-02 → 2026-09-22 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
@@ -455,6 +459,7 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
             </table>
           </div>
         </details>
+      <script type="application/json" class="dte-series-data">{"all": {"days": 109, "legs": 652, "net_pnl": -2340.055443836505, "sharpe": -0.10229319110538893, "rmdd": -0.12710537963654778, "max_dd": -18410.3572211325, "headline_stat": "210% of gross profit lost to costs", "headline_sentence": "Gross-profitable over 109 expiry days, but transaction costs alone turn the net result negative."}, "0": {"days": 38, "legs": 237, "net_pnl": -4480.336087149, "sharpe": -0.5189041184250369, "rmdd": -0.38065098147397997, "max_dd": -11770.194496281001, "headline_stat": "Net loss over the sample", "headline_sentence": "Both gross and net results are negative over 38 expiry days - this is not a costs problem, the underlying idea lost money."}, "1": {"days": 33, "legs": 172, "net_pnl": -2242.717008486501, "sharpe": -0.33587644547991713, "rmdd": -0.3983257863819008, "max_dd": -5630.3585787345, "headline_stat": "Net loss over the sample", "headline_sentence": "Both gross and net results are negative over 33 expiry days - this is not a costs problem, the underlying idea lost money."}, "2": {"days": 1, "legs": 4, "net_pnl": 1723.4340374484996, "sharpe": null, "rmdd": null, "max_dd": 0.0, "headline_stat": "R/MDD undefined, net of costs", "headline_sentence": "Net-profitable over 1 expiry days, too early in the sample to score Sharpe."}, "3": {"days": 3, "legs": 20, "net_pnl": 3478.0671683809996, "sharpe": 9.055059974559727, "rmdd": null, "max_dd": 0.0, "headline_stat": "Sharpe 9.06, net of costs", "headline_sentence": "Strong risk-adjusted edge over 3 expiry days (R/MDD undefined)."}, "4": {"days": 34, "legs": 219, "net_pnl": -818.5035540305005, "sharpe": -0.11873008387423876, "rmdd": -0.06954752311705356, "max_dd": -11768.982090891997, "headline_stat": "157% of gross profit lost to costs", "headline_sentence": "Gross-profitable over 34 expiry days, but transaction costs alone turn the net result negative."}}</script>
     </div>
 <div class="section-header" data-family-header="Theta harvest"><h2>Theta harvest</h2><span class="sh-rule"></span><span class="sh-count">1 strategy</span></div>
 
@@ -474,16 +479,16 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       <div class="card-featured-note">featured: latest NIFTY run (its default instrument) - other instruments below are compatibility checks, not tuned for it</div>
 
       <div class="headline-mini">
-        <div class="hm-stat mono good">77% of gross profit lost to costs</div>
-        <div class="hm-sentence">The strategy is gross-profitable, but more than half of that edge is consumed by brokerage, STT, and exchange charges before it reaches net P&amp;L.</div>
+        <div class="hm-stat mono good" data-stat="headline_stat">77% of gross profit lost to costs</div>
+        <div class="hm-sentence" data-stat="headline_sentence">The strategy is gross-profitable, but more than half of that edge is consumed by brokerage, STT, and exchange charges before it reaches net P&amp;L.</div>
       </div>
 
       <div class="stat-row">
-        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-bad"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 5l10 10M15 5L5 15"/></svg>Thin</span></div><div class="s-val mono">0.02</div></div>
-        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹21,829</div></div>
-        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">0.04</div></div>
-        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹572,465</div></div>
-        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">109d / 1308L</div></div>
+        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-bad" data-stat="sharpe-badge"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 5l10 10M15 5L5 15"/></svg>Thin</span></div><div class="s-val mono" data-stat="sharpe">0.02</div></div>
+        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good" data-stat="net_pnl">₹21,829</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono" data-stat="rmdd">0.04</div></div>
+        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad" data-stat="max_dd">−₹572,465</div></div>
+        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono" data-stat="sample">109d / 1308L</div></div>
       </div>
 
       <a class="btn" href="short_straddle_20260923_121801_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-01-02 → 2026-09-22 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
@@ -516,6 +521,7 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
             </table>
           </div>
         </details>
+      <script type="application/json" class="dte-series-data">{"all": {"days": 109, "legs": 1308, "net_pnl": 21828.641234302704, "sharpe": 0.022853233365212704, "rmdd": 0.038130949962939996, "max_dd": -572465.1826277149, "headline_stat": "77% of gross profit lost to costs", "headline_sentence": "The strategy is gross-profitable, but more than half of that edge is consumed by brokerage, STT, and exchange charges before it reaches net P&L."}, "0": {"days": 38, "legs": 456, "net_pnl": 343549.37313417497, "sharpe": 0.8745923935270458, "rmdd": 1.417362083030217, "max_dd": -242386.456677105, "headline_stat": "Sharpe 0.87, net of costs", "headline_sentence": "Modest edge over 38 expiry days (R/MDD 1.42)."}, "1": {"days": 33, "legs": 396, "net_pnl": 85585.23732781755, "sharpe": 0.4376383546084014, "rmdd": 0.44850628005187554, "max_dd": -190822.82932118257, "headline_stat": "22% of gross profit lost to costs", "headline_sentence": "Costs take a real, non-trivial bite out of the gross edge - the net figure, not the gross one, is the honest read of this strategy."}, "2": {"days": 1, "legs": 12, "net_pnl": -238702.20374064991, "sharpe": null, "rmdd": -1.0, "max_dd": -238702.20374064991, "headline_stat": "Net loss over the sample", "headline_sentence": "Both gross and net results are negative over 1 expiry days - this is not a costs problem, the underlying idea lost money."}, "3": {"days": 3, "legs": 36, "net_pnl": 45973.47486345249, "sharpe": 2.334640757673678, "rmdd": 1.6701291885275948, "max_dd": -27526.89742760752, "headline_stat": "Sharpe 2.33, net of costs", "headline_sentence": "Strong risk-adjusted edge over 3 expiry days (R/MDD 1.67)."}, "4": {"days": 34, "legs": 408, "net_pnl": -214577.24035049262, "sharpe": -0.8251540043387852, "rmdd": -0.4318284359254274, "max_dd": -496903.9148398, "headline_stat": "Net loss over the sample", "headline_sentence": "Both gross and net results are negative over 34 expiry days - this is not a costs problem, the underlying idea lost money."}}</script>
     </div>
 <div class="section-header" data-family-header="Premium reload"><h2>Premium reload</h2><span class="sh-rule"></span><span class="sh-count">1 strategy</span></div>
 
@@ -535,20 +541,21 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       
 
       <div class="headline-mini">
-        <div class="hm-stat mono good">Sharpe 1.02, net of costs</div>
-        <div class="hm-sentence">Solid, cost-surviving edge over 109 expiry days (R/MDD 2.58).</div>
+        <div class="hm-stat mono good" data-stat="headline_stat">Sharpe 1.02, net of costs</div>
+        <div class="hm-sentence" data-stat="headline_sentence">Solid, cost-surviving edge over 109 expiry days (R/MDD 2.58).</div>
       </div>
 
       <div class="stat-row">
-        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-ok"><svg viewBox="0 0 20 20" width="12" height="12" fill="currentColor"><circle cx="10" cy="10" r="5"/></svg>Solid</span></div><div class="s-val mono">1.02</div></div>
-        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good">₹32,669</div></div>
-        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono">2.58</div></div>
-        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad">−₹12,683</div></div>
-        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono">109d / 390L</div></div>
+        <div class="stat stat-primary"><div class="s-lbl">Sharpe <span class="sev-badge sev-ok" data-stat="sharpe-badge"><svg viewBox="0 0 20 20" width="12" height="12" fill="currentColor"><circle cx="10" cy="10" r="5"/></svg>Solid</span></div><div class="s-val mono" data-stat="sharpe">1.02</div></div>
+        <div class="stat"><div class="s-lbl">Net P&amp;L</div><div class="s-val mono good" data-stat="net_pnl">₹32,669</div></div>
+        <div class="stat stat-secondary"><div class="s-lbl">R/MDD (secondary)</div><div class="s-val mono" data-stat="rmdd">2.58</div></div>
+        <div class="stat"><div class="s-lbl">Max DD</div><div class="s-val mono bad" data-stat="max_dd">−₹12,683</div></div>
+        <div class="stat"><div class="s-lbl">Sample</div><div class="s-val mono" data-stat="sample">109d / 390L</div></div>
       </div>
 
       <a class="btn" href="nf_premium_reload_20260923_111515_ledger.html" target="_blank" rel="noopener">Open latest report — NIFTY, 2026-01-02 → 2026-09-22 <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5l6 5.5-6 5.5"/></svg></a>
       
+      <script type="application/json" class="dte-series-data">{"all": {"days": 109, "legs": 390, "net_pnl": 32668.620253470504, "sharpe": 1.0229559633110745, "rmdd": 2.5757042401898835, "max_dd": -12683.374023976503, "headline_stat": "Sharpe 1.02, net of costs", "headline_sentence": "Solid, cost-surviving edge over 109 expiry days (R/MDD 2.58)."}, "0": {"days": 38, "legs": 141, "net_pnl": 23324.13767002799, "sharpe": 1.530131570674036, "rmdd": 2.649196644182704, "max_dd": -8804.230414999507, "headline_stat": "Sharpe 1.53, net of costs", "headline_sentence": "Solid, cost-surviving edge over 38 expiry days (R/MDD 2.65)."}, "1": {"days": 33, "legs": 109, "net_pnl": 17021.292681204504, "sharpe": 2.3549266756775844, "rmdd": 3.5394605715734455, "max_dd": -4809.007569658501, "headline_stat": "Sharpe 2.35, net of costs", "headline_sentence": "Strong risk-adjusted edge over 33 expiry days (R/MDD 3.54)."}, "2": {"days": 1, "legs": 5, "net_pnl": -3121.2902661525, "sharpe": null, "rmdd": -1.0, "max_dd": -3121.2902661525, "headline_stat": "Net loss over the sample", "headline_sentence": "Both gross and net results are negative over 1 expiry days - this is not a costs problem, the underlying idea lost money."}, "3": {"days": 3, "legs": 7, "net_pnl": 3586.7699469679997, "sharpe": 8.35824224536352, "rmdd": null, "max_dd": 0.0, "headline_stat": "Sharpe 8.36, net of costs", "headline_sentence": "Strong risk-adjusted edge over 3 expiry days (R/MDD undefined)."}, "4": {"days": 34, "legs": 128, "net_pnl": -8142.2897785775, "sharpe": -1.2675898781494295, "rmdd": -0.7325765764979684, "max_dd": -11114.5920300935, "headline_stat": "Net loss over the sample", "headline_sentence": "Both gross and net results are negative over 34 expiry days - this is not a costs problem, the underlying idea lost money."}}</script>
     </div>
   </div>
   <footer>Generated by build_dashboard.py from results/*_metrics.json — read-only, no backtest re-run, no API calls.</footer>
@@ -572,6 +579,62 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
   // ---------------- card filters ----------------
   var cards = Array.prototype.slice.call(document.querySelectorAll('#cardGrid .card'));
   var sectionHeaders = Array.prototype.slice.call(document.querySelectorAll('#cardGrid .section-header'));
+
+  // ---------------- DTE-scoped stat re-render ----------------
+  // Each card carries its own precomputed per-DTE stats (build_dashboard.py's
+  // dte_series, sourced from build_ledger.py's dte_buckets - same numbers
+  // the report itself shows for that DTE, no client-side metric maths here).
+  // Parsed once per card and cached on the element.
+  var SEV_ICONS = {"sev-good": "<svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 10.5l4 4 8-9\"/></svg>", "sev-ok": "<svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"currentColor\"><circle cx=\"10\" cy=\"10\" r=\"5\"/></svg>", "sev-watch": "<svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\"><path d=\"M10 3l8.5 14.5H1.5z\"/><path d=\"M10 8v4\" stroke-linecap=\"round\"/><circle cx=\"10\" cy=\"14.5\" r=\"0.6\" fill=\"currentColor\" stroke=\"none\"/></svg>", "sev-bad": "<svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\"><path d=\"M5 5l10 10M15 5L5 15\"/></svg>", "sev-flat": "<svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\"><path d=\"M5 10h10\"/></svg>"};
+  function groupThousands(s){ return s.replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+  function fmtInr(n){
+    if (n === null || n === undefined || isNaN(n)) return '—';
+    var neg = n < 0, abs = Math.abs(n);
+    return (neg ? '\u2212\u20b9' : '\u20b9') + groupThousands(String(Math.round(abs)));
+  }
+  function fmtNum(n, decimals){
+    if (n === null || n === undefined || isNaN(n)) return '—';
+    return n.toFixed(decimals === undefined ? 2 : decimals);
+  }
+  function pnlClass(n){
+    if (n === null || n === undefined || isNaN(n)) return '';
+    return n > 0 ? 'good' : (n < 0 ? 'bad' : '');
+  }
+  function sharpeSeverity(v){
+    if (v === null || v === undefined || isNaN(v)) return {cls: 'sev-flat', label: 'N/A'};
+    if (v >= 2) return {cls: 'sev-good', label: 'Strong'};
+    if (v >= 1) return {cls: 'sev-ok', label: 'Solid'};
+    if (v >= 0.5) return {cls: 'sev-watch', label: 'Modest'};
+    return {cls: 'sev-bad', label: 'Thin'};
+  }
+  function cardDteSeries(c){
+    if (!c.__dteSeries){
+      var el = c.querySelector('script.dte-series-data');
+      c.__dteSeries = el ? JSON.parse(el.textContent) : {};
+    }
+    return c.__dteSeries;
+  }
+  function updateCardStats(c, dte){
+    var series = cardDteSeries(c);
+    var s = series[dte] || series['all'];
+    if (!s) return;
+    var hmStat = c.querySelector('[data-stat="headline_stat"]');
+    hmStat.textContent = s.headline_stat;
+    hmStat.className = 'hm-stat mono ' + pnlClass(s.net_pnl);
+    c.querySelector('[data-stat="headline_sentence"]').textContent = s.headline_sentence;
+    c.querySelector('[data-stat="sharpe"]').textContent = fmtNum(s.sharpe);
+    var sev = sharpeSeverity(s.sharpe);
+    var badge = c.querySelector('[data-stat="sharpe-badge"]');
+    badge.className = 'sev-badge ' + sev.cls;
+    badge.innerHTML = (SEV_ICONS[sev.cls] || '') + sev.label;
+    var pnlEl = c.querySelector('[data-stat="net_pnl"]');
+    pnlEl.textContent = fmtInr(s.net_pnl);
+    pnlEl.className = 's-val mono ' + pnlClass(s.net_pnl);
+    c.querySelector('[data-stat="rmdd"]').textContent = fmtNum(s.rmdd);
+    c.querySelector('[data-stat="max_dd"]').textContent = fmtInr(s.max_dd);
+    c.querySelector('[data-stat="sample"]').textContent = s.days + 'd / ' + s.legs + 'L';
+  }
+
   function applyFilters(){
     var inst = document.getElementById('fInstrument').value;
     var fam = document.getElementById('fFamily').value;
@@ -587,6 +650,7 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       var okDte = !dte || (c.getAttribute('data-dte')||'').split(' ').indexOf(dte) >= 0;
       var visible = okInst && okFam && okSharpe && okDte;
       c.hidden = !visible;
+      updateCardStats(c, dte || 'all');
       if (visible){
         shown++;
         var f = c.getAttribute('data-family');
