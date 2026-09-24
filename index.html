@@ -205,11 +205,11 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
 
   
     <div class="summary-bar">
-      <div class="sb-item"><div class="sb-val mono">7</div><div class="sb-lbl">Strategies</div></div>
-      <div class="sb-item"><div class="sb-val mono good">₹33,197</div><div class="sb-lbl">Combined Net P&amp;L (featured runs)</div></div>
-      <div class="sb-item"><div class="sb-val mono">1<span class="sb-of">/7</span></div><div class="sb-lbl">Sharpe ≥ 1 (solid or better)</div></div>
-      <div class="sb-item"><div class="sb-val mono bad">6<span class="sb-of">/7</span></div><div class="sb-lbl">Sharpe &lt; 1 (modest or thin)</div></div>
-      <div class="sb-item"><div class="sb-val mono">114d</div><div class="sb-lbl">Average sample size</div></div>
+      <div class="sb-item"><div class="sb-val mono" id="sbCount">7</div><div class="sb-lbl">Strategies</div></div>
+      <div class="sb-item"><div class="sb-val mono good" id="sbPnl">₹33,197</div><div class="sb-lbl" id="sbPnlLabel">Combined Net P&amp;L (featured runs)</div></div>
+      <div class="sb-item"><div class="sb-val mono" id="sbStrong">1<span class="sb-of">/7</span></div><div class="sb-lbl">Sharpe ≥ 1 (solid or better)</div></div>
+      <div class="sb-item"><div class="sb-val mono bad" id="sbWeak">6<span class="sb-of">/7</span></div><div class="sb-lbl">Sharpe &lt; 1 (modest or thin)</div></div>
+      <div class="sb-item"><div class="sb-val mono" id="sbAvgDays">114d</div><div class="sb-lbl">Average sample size</div></div>
     </div>
 
   <div class="filter-bar">
@@ -622,7 +622,7 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
   function updateCardStats(c, dte, costMode){
     var series = cardDteSeries(c)[costMode] || {};
     var s = series[dte] || series['all'];
-    if (!s) return;
+    if (!s) return null;
     var hmStat = c.querySelector('[data-stat="headline_stat"]');
     hmStat.textContent = s.headline_stat;
     hmStat.className = 'hm-stat mono ' + pnlClass(s.pnl);
@@ -639,6 +639,7 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
     c.querySelector('[data-stat="rmdd"]').textContent = fmtNum(s.rmdd);
     c.querySelector('[data-stat="max_dd"]').textContent = fmtInr(s.max_dd);
     c.querySelector('[data-stat="sample"]').textContent = s.days + 'd / ' + s.legs + 'L';
+    return s;
   }
 
   // ---------------- Trades DTE chips (multi-select, like the report's own
@@ -700,6 +701,12 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
     var dte = dteKey(selectedDte);
     var shown = 0;
     var famShownCount = {};
+    // Recomputed from whichever cards are currently visible, at the
+    // currently selected DTE combo/cost mode - see updateCardStats's return
+    // value. Mirrors render_summary_bar's own Python maths (build_dashboard.py)
+    // exactly, just scoped to the live filtered/DTE'd view instead of the
+    // full unfiltered set baked in at build time.
+    var sumPnl = 0, strong = 0, weak = 0, totalDays = 0;
     cards.forEach(function(c){
       var okInst = !inst || (c.getAttribute('data-instruments')||'').indexOf(inst) >= 0;
       var okFam = !fam || c.getAttribute('data-family') === fam;
@@ -709,11 +716,18 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       var okRmdd = isNaN(minRmdd) || (rmddAttr !== '' && parseFloat(rmddAttr) >= minRmdd);
       var visible = okInst && okFam && okSharpe && okRmdd;
       c.hidden = !visible;
-      updateCardStats(c, dte, costMode);
+      var s = updateCardStats(c, dte, costMode);
       if (visible){
         shown++;
         var f = c.getAttribute('data-family');
         famShownCount[f] = (famShownCount[f] || 0) + 1;
+        if (s){
+          if (s.pnl !== null && s.pnl !== undefined && !isNaN(s.pnl)) sumPnl += s.pnl;
+          if (s.sharpe !== null && s.sharpe !== undefined && !isNaN(s.sharpe)){
+            if (s.sharpe >= 1) strong++; else weak++;
+          }
+          totalDays += s.days || 0;
+        }
       }
     });
     // A section header stays only while at least one of its cards is still
@@ -723,6 +737,18 @@ footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--border); f
       h.hidden = !famShownCount[h.getAttribute('data-family-header')];
     });
     document.getElementById('fCount').textContent = shown + ' of ' + cards.length + ' strategies shown';
+
+    document.getElementById('sbCount').textContent = shown;
+    var sbPnl = document.getElementById('sbPnl');
+    sbPnl.textContent = fmtInr(sumPnl);
+    sbPnl.className = 'sb-val mono ' + pnlClass(sumPnl);
+    document.getElementById('sbPnlLabel').textContent =
+      'Combined ' + (costMode === 'gross' ? 'Gross' : 'Net') + ' P&L (featured runs)';
+    document.getElementById('sbStrong').innerHTML = strong + '<span class="sb-of">/' + shown + '</span>';
+    var sbWeak = document.getElementById('sbWeak');
+    sbWeak.innerHTML = weak + '<span class="sb-of">/' + shown + '</span>';
+    sbWeak.className = 'sb-val mono ' + (weak ? 'bad' : '');
+    document.getElementById('sbAvgDays').textContent = (shown ? Math.round(totalDays / shown) : 0) + 'd';
   }
   ['fInstrument','fFamily','fSharpe','fRmdd'].forEach(function(id){
     document.getElementById(id).addEventListener('input', applyFilters);
